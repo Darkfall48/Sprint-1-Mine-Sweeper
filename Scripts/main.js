@@ -28,6 +28,7 @@ function initGame() {
   console.log('Page Loaded')
   buildBoard()
   renderBoard(gBoard, '.board-table')
+  setMinesNegsCount(gBoard)
 }
 
 function buildBoard() {
@@ -48,7 +49,10 @@ function createBoard(boardSize) {
   for (var i = 0; i < boardSize; i++) {
     board[i] = []
     for (var j = 0; j < boardSize; j++) {
-      board[i][j] = 'Empty'
+      board[i][j] = {
+        minesAroundCount: 0,
+        isShown: true,
+      }
     }
   }
   return board
@@ -64,20 +68,61 @@ function createMine() {
 }
 
 function setMinesNegsCount(board) {
-  // TODO: Count mines around each cell
-  // TODO: Set the cell's minesAroundCount.
+  var negsCount = 0
+  //? DONE: Count mines around each cell
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      //Only if is shown //TODO: add: and not isMine
+      if (board[i][j].isShown) {
+        var negsCount = countNeighbors(board, i, j)
+        //? DONE: Set the cell's minesAroundCount.
+        board[i][j].minesAroundCount = negsCount
+        //? DONE: Render the cell
+        renderCell({ i, j }, negsCount)
+      }
+    }
+  }
+  // TODO: Have a console log to help with the debug
+  console.log(board)
+}
+
+//? Count how many mines nears the cell and return the value
+function countNeighbors(board, cellI, cellJ) {
+  var neighborsCount = 0
+  for (var i = cellI - 1; i <= cellI + 1; i++) {
+    // If on border, continue
+    if (i < 0 || i >= board.length) continue
+    for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+      // Do not count the player position (center)
+      if (i === cellI && j === cellJ) continue
+      // If on border, continue
+      if (j < 0 || j >= board[i].length) continue
+      //* If needed, insert more neighbors to count here:
+      if (board[i][j].isMine) neighborsCount++
+    }
+  }
+  return neighborsCount
+}
+
+//? Render the cell in the index HTML
+function renderCell(location, value) {
+  //* location should be an object like this: { i: 2, j: 7 }
+  // Select the elCell and set the value
+  if (value === 0) value = 'Z' // TODO: Change to spaces
+  const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+  elCell.innerHTML = value
 }
 
 //? Render the board in the index HTML
 function renderBoard(board, selector) {
   // TODO: Render the board as a <table> to the page
-  var strHTML = '<table border="1" cellPading="1"><tbody>'
+  var strHTML = '<table border="1"><tbody>'
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {
       var currentCell = board[i][j]
 
-      // Check if current cell is mine and is supposed to be shown
+      // Check if current cell is a mine and if he is supposed to be shown
       if (currentCell.isShown && currentCell.isMine) {
         currentCell = MINE
       } else {

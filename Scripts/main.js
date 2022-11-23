@@ -7,6 +7,7 @@
 Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true } */
 var gBoard
 var gNextMineIdx = 0
+var gIsMinesOnBoard
 const EMPTY = '///'
 const MINE = '☠️'
 
@@ -32,19 +33,12 @@ function initGame() {
 
 function buildBoard() {
   //? DONE: Builds the board
+  gIsMinesOnBoard = false
   gLevel = { Size: 4, Mines: 2 }
   gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
   //? DONE: Set mines manually on the board
   //   gBoard[1][2] = createMine()
   //   gBoard[2][3] = createMine()
-
-  //? DONE: Set mines at random locations
-  //! Bug known, random I and J can get the same position more than once, resulting having less mines than expected
-  for (var i = 0; i < gLevel.Mines; i++) {
-    var randomIdxI = getRandomInt(0, gBoard.length)
-    var randomIdxJ = getRandomInt(0, gBoard[0].length)
-    gBoard[randomIdxI][randomIdxJ] = createMine()
-  }
 
   //? TODO DONE: Call setMinesNegsCount()
   //* Already used in @cellClicked()
@@ -52,6 +46,16 @@ function buildBoard() {
 
   // TODO: Return the created board
   //* I don't need it
+}
+
+function setRandomMines() {
+  //? DONE: Set mines at random locations
+  //! Bug known, random I and J can get the same position more than once, resulting having less mines than expected
+  for (var i = 0; i < gLevel.Mines; i++) {
+    var randomIdxI = getRandomInt(0, gBoard.length)
+    var randomIdxJ = getRandomInt(0, gBoard[0].length)
+    gBoard[randomIdxI][randomIdxJ] = createMine()
+  }
 }
 
 function createBoard(boardSize) {
@@ -155,6 +159,13 @@ function cellClicked(elCell, i, j) {
   //   console.log('elCell:', elCell)
   //   console.log('i:', i)
   //   console.log('j:', j)
+
+  //? DONE: BONUS: Place the mines and count the neighbors only on first click.
+  if (!gIsMinesOnBoard) {
+    setRandomMines()
+    gIsMinesOnBoard = true
+  }
+
   //* Prevent future bugs
   if (gBoard[i][j].isShown) return
 

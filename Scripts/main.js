@@ -26,8 +26,13 @@ var gLevel = { Size: 4, Mines: 2 } // Default value
 /* gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 } */
 var gGame
 
+var gStartTime
+var gTimeInterval
+
 //? DONE: This is called when page loads
 function initGame() {
+  // Stopping all the intervals
+  stopIntervals()
   // initializing variables:
   gBoard = []
   console.log('Page Loaded')
@@ -43,7 +48,7 @@ function setDifficulty(size = 4, minesNb = 2) {
 function buildBoard() {
   //? DONE: Builds the board
   gGame = {
-    isOn: true,
+    isOn: false,
     showCount: 0,
     markedCount: 0,
     secsPassed: 0,
@@ -197,7 +202,11 @@ function cellClicked(elCell, i, j) {
 
   //? DONE: User can click only if the game is ON and if the cell is not shown
   //* Prevent future bugs
-  if (!gGame.isOn || gBoard[i][j].isShown) return
+  if (!gGame.isOn) {
+    gGame.isOn = true
+    startTimer()
+  }
+  if (gBoard[i][j].isShown) return
 
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
   if (!gIsMinesOnBoard) {
@@ -229,8 +238,13 @@ function cellClicked(elCell, i, j) {
 
 function cellMarked(elCell, cellI, cellJ) {
   //? DONE: Search the web (and implement) how to hide the context menu on right click
-  //? DONE: User can click only if the game is ON and the cell is not shown
-  if (!gGame.isOn || gBoard[cellI][cellJ].isShown) return
+  //? DONE: User can click only if the game is ON and if the cell is not shown
+  //* Prevent future bugs
+  if (!gGame.isOn) {
+    gGame.isOn = true
+    startTimer()
+  }
+  if (gBoard[cellI][cellJ].isShown) return
   //   console.log("It's right!")
   //   console.log(elCell)
   //? DONE: Called on right click to mark a cell (suspected to be a mine)
@@ -281,10 +295,32 @@ function expandShown(board, elCell, i, j) {
   // ? BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)
 }
 
+function stopIntervals() {
+  //? DONE: Stop Time
+  clearInterval(gTimeInterval)
+  resetTime()
+}
+
 //? Return a random integer
 function getRandomInt(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min) + min)
   //*The maximum is exclusive and the minimum is inclusive
+}
+
+//? Create a timer
+function startTimer() {
+  gStartTime = Date.now()
+  gTimeInterval = setInterval(() => {
+    const seconds = (Date.now() - gStartTime) / 1000
+    var elTime = document.querySelector('.time')
+    elTime.innerText = seconds.toFixed(2)
+  }, 1)
+}
+
+//? Reset the timer
+function resetTime() {
+  var elTime = document.querySelector('.time')
+  elTime.innerText = '0'
 }

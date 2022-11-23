@@ -5,6 +5,8 @@
 //* The model
 /* gBoard – A Matrix containing cell objects:
 Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true } */
+var gBoard
+var gNextMineIdx = 0
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -16,16 +18,43 @@ Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true 
 // secsPassed: How many seconds passed
 /* gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 } */
 
-// TODO: This is called when page loads
+//? DONE: This is called when page loads
 function initGame() {
+  // initializing variables:
+  gBoard = []
   console.log('Page Loaded')
+  buildBoard()
 }
 
 function buildBoard() {
-  // TODO: Builds the board
+  //? DONE: Builds the board
+  gBoard = createBoard(4) // TODO: Change '4' to difficulties
+  // TODO: Set mines manually on the board
+  gBoard[1][2] = createMine()
+  gBoard[2][3] = createMine()
+
   // TODO: Set mines at random locations
   // TODO: Call setMinesNegsCount()
   // TODO: Return the created board
+}
+
+function createBoard(boardSize) {
+  var board = []
+  for (var i = 0; i < boardSize; i++) {
+    board[i] = []
+    for (var j = 0; j < boardSize; j++) {
+      board[i][j] = ''
+    }
+  }
+  return board
+}
+
+function createMine() {
+  var mine = {
+    idx: gNextMineIdx++,
+    isShown: false,
+  }
+  return mine
 }
 
 function setMinesNegsCount(board) {

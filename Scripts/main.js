@@ -48,7 +48,7 @@ function createBoard(boardSize) {
   for (var i = 0; i < boardSize; i++) {
     board[i] = []
     for (var j = 0; j < boardSize; j++) {
-      board[i][j] = '1'
+      board[i][j] = 'Empty'
     }
   }
   return board
@@ -75,10 +75,17 @@ function renderBoard(board, selector) {
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {
-      var cell = board[i][j]
-      cell = cell.isMine ? MINE : EMPTY
+      var currentCell = board[i][j]
+
+      // Check if current cell is mine and is supposed to be shown
+      if (currentCell.isShown && currentCell.isMine) {
+        currentCell = MINE
+      } else {
+        currentCell = EMPTY
+      }
+
       const className = `cell cell-${i}-${j}`
-      strHTML += `<td class="${className}">${cell}</td>`
+      strHTML += `<td class="${className}">${currentCell}</td>`
     }
     strHTML += '</tr>'
   }

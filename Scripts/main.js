@@ -43,6 +43,8 @@ function initGame() {
   console.log('Page Loaded')
   buildBoard()
   renderBoard(gBoard, '.board-table')
+  updateMarkedCount(0)
+  updateShownCount(0)
 }
 
 function setDifficulty(size = 4, minesNb = 2) {

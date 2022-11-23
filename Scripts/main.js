@@ -9,7 +9,9 @@ var gBoard
 var gNextMineIdx = 0
 var gIsMinesOnBoard
 const EMPTY = '///'
-const MINE = '☠️'
+// const MINE = '☠️'
+//? DONE: Mines look like mines.
+const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -149,7 +151,7 @@ function renderCell(location, value) {
 //? Render the board in the index HTML
 function renderBoard(board, selector) {
   //? DONE: Render the board as a <table> to the page
-  var strHTML = '<table border="1"><tbody>'
+  var strHTML = '<table border="1" cellpadding="15"><tbody>'
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {

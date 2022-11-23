@@ -1,11 +1,27 @@
 * {
   text-align: center;
+  transition: 200ms;
 }
 
 body {
   background-color: aliceblue;
 }
 
+/* ? DONE: Add a footer at the bottom of the page with your full name. */
+footer {
+  height: 500px;
+  width: 100%;
+  position: fixed;
+  margin-top: 20%;
+  padding-bottom: 420px;
+  background-color: lightblue;
+}
+
+footer h2 {
+  color: grey;
+}
+
+/*? DONE: Board keeps its position (shouldn't move) along all game phases */
 table {
   max-width: 320px;
   min-width: 320px;
@@ -23,18 +39,20 @@ table {
 }
 
 td {
-  /*? DONE: cells are squares */
-  max-height: 2rem;
-  min-height: 2rem;
-  max-width: 2rem;
-  min-width: 2rem;
+  white-space: nowrap;
+  text-align: center;
+}
+
+tr {
   white-space: nowrap;
 }
 
 .cell {
   /* white-space: nowrap; */
-  padding: auto;
-
+  /*? TODO DONE: cells are squares */
+  max-height: 2rem;
+  min-height: 2rem;
+  max-width: 2rem;
+  min-width: 2rem;
   /* font-size: XX-large; */
-  padding: 4px;
 }

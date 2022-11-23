@@ -240,6 +240,8 @@ function cellClicked(elCell, i, j) {
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
     //? DONE: Game Over!
+    //? DONE: Play the audio file
+    playAudio('explode')
     gameIsOver()
   } else {
     //* DONE: Count neighbors
@@ -249,6 +251,11 @@ function cellClicked(elCell, i, j) {
     //? DONE: Count how many cells are shown
     updateShownCount('1')
     console.log('Show count:', gGame.showCount)
+  }
+
+  //? DONE: Play the audio file
+  if (gGame.isOn) {
+    playAudio('r-click')
   }
 }
 
@@ -282,6 +289,10 @@ function cellMarked(elCell, cellI, cellJ) {
 
     updateMarkedCount('-1')
     // console.log('Marked count:', gGame.markedCount)
+    //? DONE: Play the audio file
+    if (gGame.isOn) {
+      playAudio('on-flag')
+    }
   } else {
     //? Done: Check if a good mine is unFlagged
     if (gBoard[cellI][cellJ].isMine) {
@@ -368,6 +379,15 @@ function stopIntervals() {
   //? DONE: Stop Time
   clearInterval(gTimeInterval)
   resetTime()
+}
+
+//? Play the audio file once created
+function playAudio(audioFile) {
+  //* Use createAudio() before using this function
+  //* Make the audio file playable
+  audioFile = '.' + audioFile
+  var elAudioFile = document.querySelector(audioFile)
+  elAudioFile.play()
 }
 
 //? Return a random integer

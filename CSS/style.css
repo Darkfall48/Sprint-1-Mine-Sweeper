@@ -2,14 +2,38 @@
   text-align: center;
 }
 
+body {
+  background-color: aliceblue;
+}
+
+table {
+  max-width: 320px;
+  min-width: 320px;
+  max-height: 320px;
+  min-height: 320px;
+  font-size: 32px;
+  /* white-space: nowrap; */
+  /* position: absolute; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .board-table {
-  /* position: absolute;
-  /* right: 40%; */
+  /* ? DONE: cells are squares */
+}
+
+td {
+  /*? DONE: cells are squares */
+  max-height: 2rem;
+  min-height: 2rem;
+  max-width: 2rem;
+  min-width: 2rem;
+  white-space: nowrap;
 }
 
 .cell {
-  height: 30px;
-  width: 30px;
-  font-size: XX-large;
+  /* white-space: nowrap; */
+
+  /* font-size: XX-large; */
   padding: 4px;
 }

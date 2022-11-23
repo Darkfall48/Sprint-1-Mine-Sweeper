@@ -34,7 +34,7 @@ function initGame() {
 function buildBoard() {
   //? DONE: Builds the board
   gIsMinesOnBoard = false
-  gLevel = { Size: 6, Mines: 2 }
+  gLevel = { Size: 4, Mines: 2 }
   gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
   //? DONE: Set mines manually on the board
   //   gBoard[1][2] = createMine()

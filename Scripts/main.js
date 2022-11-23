@@ -16,7 +16,7 @@ const FLAG = '🚩'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
-var gLevel = { Size: 4, Mines: 2 }
+var gLevel = { Size: 4, Mines: 2 } // Default value
 
 //* This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play
@@ -165,7 +165,7 @@ function renderCell(location, value) {
 //? Render the board in the index HTML
 function renderBoard(board, selector) {
   //? DONE: Render the board as a <table> to the page
-  var strHTML = '<table border="1" cellpadding="auto";><tbody>'
+  var strHTML = '<table class="board" border="1" cellpadding="auto";><tbody>'
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {
@@ -222,7 +222,7 @@ function cellClicked(elCell, i, j) {
     // console.log(gBoard[i][j].minesAroundCount)
     renderCell({ i, j }, gBoard[i][j].minesAroundCount)
     //? DONE: Count how many cells are shown
-    gGame.showCount++
+    updateShownCount('1')
     console.log('Show count:', gGame.showCount)
   }
 }
@@ -233,20 +233,42 @@ function cellMarked(elCell, cellI, cellJ) {
   if (!gGame.isOn || gBoard[cellI][cellJ].isShown) return
   //   console.log("It's right!")
   //   console.log(elCell)
-  // TODO: Called on right click to mark a cell (suspected to be a mine)
+  //? DONE: Called on right click to mark a cell (suspected to be a mine)
+  // When the cell is unmarked:
   if (!gBoard[cellI][cellJ].isMarked) {
     elCell.innerHTML = FLAG
     gBoard[cellI][cellJ].isMarked = true
     console.log('This cell is marked')
-    gGame.markedCount++
+    updateMarkedCount('+1')
     console.log('Marked count:', gGame.markedCount)
   } else {
+    //When the cell is already marked
     elCell.innerHTML = EMPTY
     gBoard[cellI][cellJ].isMarked = false
     console.log('This cell is unmarked')
-    gGame.markedCount--
+    updateMarkedCount('-1')
     console.log('Marked count:', gGame.markedCount)
   }
+}
+
+//? DONE: Update the marked count value
+function updateMarkedCount(value) {
+  // The model
+  gGame.markedCount += +value
+  // The DOM
+  const elMarked = document.querySelector('.marked')
+  elMarked.style.color = 'blue'
+  elMarked.innerText = gGame.markedCount
+}
+
+//? DONE: Update the shown count value
+function updateShownCount(value) {
+  // The model
+  gGame.showCount += +value
+  // The DOM
+  const elShown = document.querySelector('.shown')
+  elShown.style.color = 'green'
+  elShown.innerText = gGame.showCount
 }
 
 function checkGameOver() {

@@ -49,7 +49,7 @@ footer h2 {
 }
 
 /*? DONE: Board keeps its position (shouldn't move) along all game phases */
-table {
+.board {
   max-width: 320px;
   min-width: 320px;
   max-height: 320px;
@@ -77,3 +77,15 @@ table {
 /* .isMarked {
   background-color: lightblue;
 } */
+
+.pannel {
+  margin-top: 15px;
+  height: fit-content;
+  width: fit-content;
+  font-size: small;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pannel td {
+  padding: 10px;
+}

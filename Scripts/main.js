@@ -32,15 +32,26 @@ function initGame() {
 
 function buildBoard() {
   //? DONE: Builds the board
-  gLevel = { Size: 4 }
+  gLevel = { Size: 4, Mines: 2 }
   gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
-  // TODO: Set mines manually on the board
-  gBoard[1][2] = createMine()
-  gBoard[2][3] = createMine()
+  //? DONE: Set mines manually on the board
+  //   gBoard[1][2] = createMine()
+  //   gBoard[2][3] = createMine()
 
-  // TODO: Set mines at random locations
-  // TODO: Call setMinesNegsCount()
+  //? DONE: Set mines at random locations
+  //! Bug known, random I and J can get the same position more than once, resulting having less mines than expected
+  for (var i = 0; i < gLevel.Mines; i++) {
+    var randomIdxI = getRandomInt(0, gBoard.length)
+    var randomIdxJ = getRandomInt(0, gBoard[0].length)
+    gBoard[randomIdxI][randomIdxJ] = createMine()
+  }
+
+  //? TODO DONE: Call setMinesNegsCount()
+  //* Already used in @cellClicked()
+  //   setMinesNegsCount(gBoard)
+
   // TODO: Return the created board
+  //* I don't need it
 }
 
 function createBoard(boardSize) {
@@ -154,6 +165,8 @@ function cellClicked(elCell, i, j) {
   //* Update the DOM
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
+    // TODO: Game Over!
+    // TODO: Reveal all mines
   } else {
     //* Count neighbors
     setMinesNegsCount(gBoard)
@@ -175,4 +188,12 @@ function expandShown(board, elCell, i, j) {
   // TODO: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
   // ? NOTE: start with a basic implementation that only opens the non-mine 1st degree neighbors
   // ? BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)
+}
+
+//? Return a random integer
+function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min) + min)
+  //*The maximum is exclusive and the minimum is inclusive
 }

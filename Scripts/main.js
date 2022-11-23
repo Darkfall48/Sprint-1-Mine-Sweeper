@@ -57,6 +57,7 @@ function buildBoard() {
   gGame = {
     isOn: false,
     isStarted: true,
+    isWinning: false,
     showCount: 0,
     markedCount: 0,
     goodFlaggedCount: 0,
@@ -273,7 +274,6 @@ function cellMarked(elCell, cellI, cellJ) {
     //? Done: Check if a good mine is flagged
     if (gBoard[cellI][cellJ].isMine) {
       gGame.goodFlaggedCount++
-      checkGameOver()
       console.log('Good flagged mine count:', gGame.goodFlaggedCount)
     }
     elCell.innerHTML = FLAG
@@ -286,7 +286,6 @@ function cellMarked(elCell, cellI, cellJ) {
     //? Done: Check if a good mine is unFlagged
     if (gBoard[cellI][cellJ].isMine) {
       gGame.goodFlaggedCount--
-      checkGameOver()
       console.log('Good flagged mine count:', gGame.goodFlaggedCount)
     }
     //When the cell is already marked
@@ -306,6 +305,8 @@ function updateMarkedCount(value) {
   const elMarked = document.querySelector('.marked')
   elMarked.style.color = 'blue'
   elMarked.innerText = gGame.markedCount
+
+  checkGameOver()
 }
 
 //? DONE: Update the shown count value
@@ -316,23 +317,22 @@ function updateShownCount(value) {
   const elShown = document.querySelector('.shown')
   elShown.style.color = 'green'
   elShown.innerText = gGame.showCount
+
+  checkGameOver()
 }
 
 function checkGameOver() {
   //? DONE: Game ends when all mines are marked
-  if (+gGame.goodFlaggedCount === +gLevel.Mines) {
-    console.log('You Win!!!')
-    const elFace = document.querySelector('.face')
-    elFace.innerText = WINFACE
-    // TODO: Because of this function, the face change back to SAD
-    gameIsOver()
-  }
   //? DONE: and all the other cells are shown
   var emptyCount = gLevel.Size * gLevel.Size - gLevel.Mines
-  if (gGame.showCount === emptyCount) {
+  console.log(emptyCount)
+  if (
+    +gGame.goodFlaggedCount === +gLevel.Mines ||
+    +gGame.showCount === +emptyCount
+  ) {
     console.log('You Win!!!')
-    const elFace = document.querySelector('.face')
-    elFace.innerText = WINFACE
+    gGame.isWinning = true
+    //? DONE: Because of this function, the face change back to SAD
     gameIsOver()
   }
 }
@@ -342,7 +342,7 @@ function gameIsOver() {
   revealMines(gBoard)
   stopIntervals()
   const elFace = document.querySelector('.face')
-  elFace.innerText = SADFACE
+  elFace.innerText = gGame.isWinning ? WINFACE : SADFACE
 }
 
 //? DONE: Reveal all mines

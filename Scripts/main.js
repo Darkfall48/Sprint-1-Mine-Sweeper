@@ -7,9 +7,12 @@
 Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true } */
 var gBoard
 var gNextMineIdx = 0
+const EMPTY = '///'
+const MINE = '☠️'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
+var gLevel
 
 //* This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play
@@ -24,11 +27,13 @@ function initGame() {
   gBoard = []
   console.log('Page Loaded')
   buildBoard()
+  renderBoard(gBoard, '.board-table')
 }
 
 function buildBoard() {
   //? DONE: Builds the board
-  gBoard = createBoard(4) // TODO: Change '4' to difficulties
+  gLevel = { Size: 4 }
+  gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
   // TODO: Set mines manually on the board
   gBoard[1][2] = createMine()
   gBoard[2][3] = createMine()
@@ -43,7 +48,7 @@ function createBoard(boardSize) {
   for (var i = 0; i < boardSize; i++) {
     board[i] = []
     for (var j = 0; j < boardSize; j++) {
-      board[i][j] = ''
+      board[i][j] = '1'
     }
   }
   return board
@@ -53,6 +58,7 @@ function createMine() {
   var mine = {
     idx: gNextMineIdx++,
     isShown: false,
+    isMine: true,
   }
   return mine
 }
@@ -62,8 +68,24 @@ function setMinesNegsCount(board) {
   // TODO: Set the cell's minesAroundCount.
 }
 
-function renderBoard(board) {
+//? Render the board in the index HTML
+function renderBoard(board, selector) {
   // TODO: Render the board as a <table> to the page
+  var strHTML = '<table border="1" cellPading="1"><tbody>'
+  for (var i = 0; i < board.length; i++) {
+    strHTML += '<tr>'
+    for (var j = 0; j < board[0].length; j++) {
+      var cell = board[i][j]
+      cell = cell.isMine ? MINE : EMPTY
+      const className = `cell cell-${i}-${j}`
+      strHTML += `<td class="${className}">${cell}</td>`
+    }
+    strHTML += '</tr>'
+  }
+  strHTML += '</tbody></table>'
+
+  const elTable = document.querySelector(selector)
+  elTable.innerHTML = strHTML
 }
 
 function cellClicked(elCell, i, j) {

@@ -1,3 +1,13 @@
 * {
   text-align: center;
 }
+
+.board-table {
+  position: absolute;
+  right: 40%;
+}
+
+.cell {
+  font-size: XX-large;
+  padding: 4px;
+}

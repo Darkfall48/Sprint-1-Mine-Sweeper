@@ -28,7 +28,6 @@ function initGame() {
   console.log('Page Loaded')
   buildBoard()
   renderBoard(gBoard, '.board-table')
-  setMinesNegsCount(gBoard)
 }
 
 function buildBoard() {
@@ -51,7 +50,7 @@ function createBoard(boardSize) {
     for (var j = 0; j < boardSize; j++) {
       board[i][j] = {
         minesAroundCount: 0,
-        isShown: true,
+        isShown: false,
       }
     }
   }
@@ -72,8 +71,8 @@ function setMinesNegsCount(board) {
   //? DONE: Count mines around each cell
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[0].length; j++) {
-      //Only if is shown //TODO: add: and not isMine
-      if (board[i][j].isShown) {
+      //?DONE: Only if is shown and not isMine
+      if (board[i][j].isShown && !board[i][j].isMine) {
         var negsCount = countNeighbors(board, i, j)
         //? DONE: Set the cell's minesAroundCount.
         board[i][j].minesAroundCount = negsCount
@@ -108,14 +107,14 @@ function countNeighbors(board, cellI, cellJ) {
 function renderCell(location, value) {
   //* location should be an object like this: { i: 2, j: 7 }
   // Select the elCell and set the value
-  if (value === 0) value = 'Z' // TODO: Change to spaces
+  if (value === 0) value = '\t' //? DONE: Change to space/tab
   const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
   elCell.innerHTML = value
 }
 
 //? Render the board in the index HTML
 function renderBoard(board, selector) {
-  // TODO: Render the board as a <table> to the page
+  //? DONE: Render the board as a <table> to the page
   var strHTML = '<table border="1"><tbody>'
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
@@ -130,7 +129,7 @@ function renderBoard(board, selector) {
       }
 
       const className = `cell cell-${i}-${j}`
-      strHTML += `<td class="${className}">${currentCell}</td>`
+      strHTML += `<td class="${className}" onclick="cellClicked(this, ${i}, ${j})">${currentCell}</td>`
     }
     strHTML += '</tr>'
   }
@@ -141,7 +140,26 @@ function renderBoard(board, selector) {
 }
 
 function cellClicked(elCell, i, j) {
-  // TODO: Called when a cell (td) is clicked
+  //? DONE: Called when a cell (td) is clicked
+  //   console.log('elCell:', elCell)
+  //   console.log('i:', i)
+  //   console.log('j:', j)
+  //* Prevent future bugs
+  if (gBoard[i][j].isShown) return
+
+  //* Update the model
+  gBoard[i][j].isShown = true
+  //   console.log(gBoard[i][j])
+
+  //* Update the DOM
+  if (gBoard[i][j].isMine) {
+    renderCell({ i, j }, MINE)
+  } else {
+    //* Count neighbors
+    setMinesNegsCount(gBoard)
+    // console.log(gBoard[i][j].minesAroundCount)
+    renderCell({ i, j }, gBoard[i][j].minesAroundCount)
+  }
 }
 
 function cellMarked(elCell) {

@@ -17,48 +17,40 @@ Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true 
 /* gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 } */
 
 // TODO: This is called when page loads
-initGame()
-{
+function initGame() {
   console.log('Page Loaded')
 }
 
-buildBoard()
-{
+function buildBoard() {
   // TODO: Builds the board
   // TODO: Set mines at random locations
   // TODO: Call setMinesNegsCount()
   // TODO: Return the created board
 }
 
-setMinesNegsCount(board)
-{
+function setMinesNegsCount(board) {
   // TODO: Count mines around each cell
   // TODO: Set the cell's minesAroundCount.
 }
 
-renderBoard(board)
-{
+function renderBoard(board) {
   // TODO: Render the board as a <table> to the page
 }
 
-cellClicked(elCell, i, j)
-{
+function cellClicked(elCell, i, j) {
   // TODO: Called when a cell (td) is clicked
 }
 
-cellMarked(elCell)
-{
+function cellMarked(elCell) {
   // TODO: Called on right click to mark a cell (suspected to be a mine)
   // TODO: Search the web (and implement) how to hide the context menu on right click
 }
 
-checkGameOver()
-{
+function checkGameOver() {
   // TODO: Game ends when all mines are marked, and all the other cells are shown
 }
 
-expandShown(board, elCell, i, j)
-{
+function expandShown(board, elCell, i, j) {
   // TODO: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
   // ? NOTE: start with a basic implementation that only opens the non-mine 1st degree neighbors
   // ? BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)

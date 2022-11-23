@@ -43,7 +43,7 @@ function initGame() {
   console.log('Page Loaded')
   buildBoard()
   renderBoard(gBoard, '.board-table')
-  updateMarkedCount(0)
+  updateMarkedCount(gLevel.Mines)
   updateShownCount(0)
 }
 
@@ -267,6 +267,8 @@ function cellMarked(elCell, cellI, cellJ) {
   //? DONE: Called on right click to mark a cell (suspected to be a mine)
   // When the cell is unmarked:
   if (!gBoard[cellI][cellJ].isMarked) {
+    //? DONE: Prevent user from checking more cells than allowed
+    if (gGame.markedCount === 0) return
     //? Done: Check if a good mine is flagged
     if (gBoard[cellI][cellJ].isMine) {
       gGame.goodFlaggedCount++
@@ -276,7 +278,8 @@ function cellMarked(elCell, cellI, cellJ) {
     elCell.innerHTML = FLAG
     gBoard[cellI][cellJ].isMarked = true
     // console.log('This cell is marked')
-    updateMarkedCount('+1')
+
+    updateMarkedCount('-1')
     // console.log('Marked count:', gGame.markedCount)
   } else {
     //? Done: Check if a good mine is unFlagged
@@ -289,7 +292,7 @@ function cellMarked(elCell, cellI, cellJ) {
     elCell.innerHTML = EMPTY
     gBoard[cellI][cellJ].isMarked = false
     // console.log('This cell is unmarked')
-    updateMarkedCount('-1')
+    updateMarkedCount('+1')
     // console.log('Marked count:', gGame.markedCount)
   }
 }

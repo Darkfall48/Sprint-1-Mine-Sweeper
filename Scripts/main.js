@@ -235,6 +235,7 @@ function cellClicked(elCell, i, j) {
   //   console.log(gBoard[i][j])
 
   //* Update the DOM
+  elCell.classList.add('dark')
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
     //? DONE: Game Over!
@@ -323,6 +324,7 @@ function checkGameOver() {
     console.log('You Win!!!')
     const elFace = document.querySelector('.face')
     elFace.innerText = WINFACE
+    // TODO: Because of this function, the face change back to SAD
     gameIsOver()
   }
   //? DONE: and all the other cells are shown

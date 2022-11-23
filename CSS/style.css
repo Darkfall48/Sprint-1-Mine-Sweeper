@@ -7,28 +7,40 @@ body {
   background-color: aliceblue;
 }
 
+.time {
+  color: rgb(245, 81, 21);
+}
+
 .face {
   background-color: aliceblue;
   margin: 20px;
   font-size: xx-large;
   border-radius: 25px;
-  border-width: 1px;
+  border-width: 0px;
   height: 50px;
   width: 50px;
   padding: 1px;
+  /* text-shadow: drop-shadow(5px 5px 10px #000); */
+  /* text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5); */
 }
 
 .face:hover {
   font-size: x-large;
+  cursor: pointer;
 }
 
 .difficulty {
   font-size: large;
   background-color: rgb(255, 212, 212);
+  border-radius: 6px;
+  border-width: 2px;
+  box-shadow: 2px 2px 2px rgb(177, 175, 175);
 }
 
 .difficulty:hover {
   background-color: pink;
+  cursor: pointer;
+  border-radius: 8px;
 }
 .difficulty:active {
   font-size: smaller;
@@ -38,24 +50,22 @@ body {
 footer {
   height: 500px;
   width: 100%;
+  left: 0px;
   position: fixed;
   padding-bottom: 420px;
   background-color: lightblue;
 }
 
 footer h2 {
-  color: grey;
+  color: rgb(63, 43, 43);
 }
 
 /*? DONE: Board keeps its position (shouldn't move) along all game phases */
 .board {
-  max-width: 320px;
-  min-width: 320px;
-  max-height: 320px;
-  min-height: 320px;
-  /* font-size: 32px; */
-  /* white-space: nowrap; */
-  /* position: absolute; */
+  /* background-image: linear-gradient(#38b6ff, #00d4ff); */
+  table-layout: fixed;
+  width: 400px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -63,14 +73,22 @@ footer h2 {
 .cell {
   /* white-space: nowrap; */
   /*? TODO DONE: cells are squares */
-  max-height: 50px;
+  /* max-height: 50px;
   min-height: 50px;
   max-width: 25px;
-  min-width: 25px;
+  min-width: 25px; */
+  /* table-layout: fixed; */
+  /* min-width: auto;
+  min-height: auto; */
+  width: 25px;
+  height: 25px;
   text-align: center;
   padding: auto;
   font-size: 24px;
+  /* margin-left: auto;
+  margin-right: auto; */
   /* font-size: XX-large; */
+  cursor: crosshair;
 }
 
 /* .isMarked {
@@ -78,13 +96,20 @@ footer h2 {
 } */
 
 .pannel {
+  background-color: aliceblue;
   margin-top: 15px;
   height: fit-content;
   width: fit-content;
   font-size: small;
   margin-left: auto;
   margin-right: auto;
+  table-layout: fixed;
+  width: 400px;
 }
 .pannel td {
   padding: 10px;
+}
+
+.dark {
+  background-color: rgb(180, 208, 218);
 }

@@ -7,20 +7,17 @@
     <link rel="stylesheet" href="CSS/style.css" />
     <title>Sprint 1 by Sidney Sebban</title>
   </head>
-  <body onload="initGame()">
+  <body onload="initGame()" oncontextmenu="return false">
     <h1>Mine Sweeper</h1>
     <div>
-      <button class="difficulty easy" onclick="setDifficulty(3, 1)">
+      <button class="difficulty easy" onclick="setDifficulty(4, 2)">
         Easy
       </button>
-      <button class="difficulty medium" onclick="setDifficulty(4, 2)">
+      <button class="difficulty medium" onclick="setDifficulty(8, 14)">
         Medium
       </button>
-      <button class="difficulty hard" onclick="setDifficulty(5, 8)">
+      <button class="difficulty hard" onclick="setDifficulty(12, 32)">
         Hard
-      </button>
-      <button class="difficulty master" onclick="setDifficulty(6, 12)">
-        Master
       </button>
     </div>
     <button class="face" onclick="initGame()">😋</button>

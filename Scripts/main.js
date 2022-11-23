@@ -12,6 +12,7 @@ const EMPTY = '///'
 // const MINE = '☠️'
 //? DONE: Mines look like mines.
 const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
+const FLAG = '🚩'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -23,6 +24,7 @@ var gLevel = { Size: 4, Mines: 2 }
 // markedCount: How many cells are marked (with a flag)
 // secsPassed: How many seconds passed
 /* gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 } */
+var gGame
 
 //? DONE: This is called when page loads
 function initGame() {
@@ -40,8 +42,14 @@ function setDifficulty(size = 4, minesNb = 2) {
 
 function buildBoard() {
   //? DONE: Builds the board
+  gGame = {
+    isOn: true,
+    showCount: 0,
+    markedCount: 0,
+    secsPassed: 0,
+  }
   gIsMinesOnBoard = false
-  gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
+  gBoard = createBoard(gLevel.Size) //? DONE: Change '4' to difficulties
   //? DONE: Set mines manually on the board
   //   gBoard[1][2] = createMine()
   //   gBoard[2][3] = createMine()
@@ -72,6 +80,8 @@ function createBoard(boardSize) {
       board[i][j] = {
         minesAroundCount: 0,
         isShown: false,
+        isMarked: false,
+        isMine: false,
       }
     }
   }
@@ -155,7 +165,7 @@ function renderCell(location, value) {
 //? Render the board in the index HTML
 function renderBoard(board, selector) {
   //? DONE: Render the board as a <table> to the page
-  var strHTML = '<table border="1" cellpadding="15"><tbody>'
+  var strHTML = '<table border="1" cellpadding="auto";><tbody>'
   for (var i = 0; i < board.length; i++) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {
@@ -169,7 +179,7 @@ function renderBoard(board, selector) {
       }
 
       const className = `cell cell-${i}-${j}`
-      strHTML += `<td class="${className}" onclick="cellClicked(this, ${i}, ${j})">${currentCell}</td>`
+      strHTML += `<td class="${className}" onclick="cellClicked(this, ${i}, ${j})" oncontextmenu="cellMarked(this, ${i}, ${j})">${currentCell}</td>`
     }
     strHTML += '</tr>'
   }
@@ -185,6 +195,10 @@ function cellClicked(elCell, i, j) {
   //   console.log('i:', i)
   //   console.log('j:', j)
 
+  //? DONE: User can click only if the game is ON and if the cell is not shown
+  //* Prevent future bugs
+  if (!gGame.isOn || gBoard[i][j].isShown) return
+
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
   if (!gIsMinesOnBoard) {
     setRandomMines()
@@ -192,9 +206,6 @@ function cellClicked(elCell, i, j) {
   }
 
   // TODO: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
-
-  //* Prevent future bugs
-  if (gBoard[i][j].isShown) return
 
   //* Update the model
   gBoard[i][j].isShown = true
@@ -206,16 +217,36 @@ function cellClicked(elCell, i, j) {
     // TODO: Game Over!
     // TODO: Reveal all mines
   } else {
-    //* Count neighbors
+    //* DONE: Count neighbors
     setMinesNegsCount(gBoard)
     // console.log(gBoard[i][j].minesAroundCount)
     renderCell({ i, j }, gBoard[i][j].minesAroundCount)
+    //? DONE: Count how many cells are shown
+    gGame.showCount++
+    console.log('Show count:', gGame.showCount)
   }
 }
 
-function cellMarked(elCell) {
+function cellMarked(elCell, cellI, cellJ) {
+  //? DONE: Search the web (and implement) how to hide the context menu on right click
+  //? DONE: User can click only if the game is ON and the cell is not shown
+  if (!gGame.isOn || gBoard[cellI][cellJ].isShown) return
+  //   console.log("It's right!")
+  //   console.log(elCell)
   // TODO: Called on right click to mark a cell (suspected to be a mine)
-  // TODO: Search the web (and implement) how to hide the context menu on right click
+  if (!gBoard[cellI][cellJ].isMarked) {
+    elCell.innerHTML = FLAG
+    gBoard[cellI][cellJ].isMarked = true
+    console.log('This cell is marked')
+    gGame.markedCount++
+    console.log('Marked count:', gGame.markedCount)
+  } else {
+    elCell.innerHTML = EMPTY
+    gBoard[cellI][cellJ].isMarked = false
+    console.log('This cell is unmarked')
+    gGame.markedCount--
+    console.log('Marked count:', gGame.markedCount)
+  }
 }
 
 function checkGameOver() {

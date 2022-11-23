@@ -54,7 +54,7 @@ table {
   min-width: 320px;
   max-height: 320px;
   min-height: 320px;
-  font-size: 32px;
+  /* font-size: 32px; */
   /* white-space: nowrap; */
   /* position: absolute; */
   margin-left: auto;
@@ -64,10 +64,16 @@ table {
 .cell {
   /* white-space: nowrap; */
   /*? TODO DONE: cells are squares */
-  max-height: 2rem;
-  min-height: 2rem;
-  max-width: 2rem;
-  min-width: 2rem;
+  max-height: 50px;
+  min-height: 50px;
+  max-width: 25px;
+  min-width: 25px;
   text-align: center;
+  padding: auto;
+  font-size: 24px;
   /* font-size: XX-large; */
 }
+
+/* .isMarked {
+  background-color: lightblue;
+} */

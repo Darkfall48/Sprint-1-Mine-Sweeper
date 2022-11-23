@@ -1,5 +1,16 @@
 'use strict'
 
+/* gBoard – A Matrix containing cell objects:
+Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true } */
+var gBoard
+var gNextMineIdx = 0
+var gIsMinesOnBoard
+const EMPTY = '///'
+// const MINE = '☠️'
+//? DONE: Mines look like mines.
+const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
+const FLAG = '🚩'
+
 function buildBoard() {
   //? DONE: Builds the board
   gGame = {
@@ -110,9 +121,31 @@ function countNeighbors(board, cellI, cellJ) {
   return neighborsCount
 }
 
-function expandShown(board, elCell, i, j) {
+function expandShown(board, elCell, cellI, cellJ) {
   // TODO: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
+  if (board[cellI][cellJ].minesAroundCount > 0) return
+  console.log('board', board)
+  console.log('elCell', elCell)
+  console.log('i', cellI, 'j', cellJ)
   // ? NOTE: start with a basic implementation that only opens the non-mine 1st degree neighbors
+  for (var i = cellI - 1; i <= cellI + 1; i++) {
+    // If on border, continue
+    if (i < 0 || i >= board.length) continue
+    for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+      // Do not count the player position (center)
+      if (i === cellI && j === cellJ) continue
+      // If on border, continue
+      if (j < 0 || j >= board[i].length) continue
+      //* If needed, insert more neighbors to count here:
+      if (!board[i][j].isMine) {
+        board[i][j].isShown = true
+        console.log('Is shown: ', board[i][j].isShown)
+        setMinesNegsCount(gBoard)
+        renderCell({ i, j }, board[i][j].minesAroundCount)
+        updateShownCount(1)
+      }
+    }
+  }
   // ? BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)
 }
 
@@ -168,6 +201,9 @@ function renderCell(location, value) {
       break
   }
   elCell.innerHTML = value
+  if (!gBoard[location.i][location.j].isMine) {
+    elCell.classList.add('dark')
+  }
 }
 
 function cellClicked(elCell, i, j) {
@@ -195,8 +231,6 @@ function cellClicked(elCell, i, j) {
     gIsMinesOnBoard = true
   }
 
-  // TODO: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
-
   //* Update the model
   gBoard[i][j].isShown = true
   //   console.log(gBoard[i][j])
@@ -217,6 +251,9 @@ function cellClicked(elCell, i, j) {
     //? DONE: Count how many cells are shown
     updateShownCount('1')
     console.log('Show count:', gGame.showCount)
+    //
+    // TODO: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
+    expandShown(gBoard, elCell, i, j)
   }
 
   //? DONE: Play the audio file

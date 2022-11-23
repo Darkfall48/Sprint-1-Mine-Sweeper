@@ -1,5 +1,15 @@
 'use strict'
 
+var gStartTime
+var gTimeInterval
+
+//? Stop the intervals
+function stopIntervals() {
+  //? DONE: Stop Time
+  clearInterval(gTimeInterval)
+  resetTime()
+}
+
 //? Create a timer
 function startTimer() {
   gStartTime = Date.now()

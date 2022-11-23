@@ -2,17 +2,7 @@
 
 // TODO: Variables:
 
-//* The model
-/* gBoard – A Matrix containing cell objects:
-Each cell: { minesAroundCount: 4, isShown: false, isMine: false, isMarked: true } */
-var gBoard
-var gNextMineIdx = 0
-var gIsMinesOnBoard
-const EMPTY = '///'
-// const MINE = '☠️'
-//? DONE: Mines look like mines.
-const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
-const FLAG = '🚩'
+//* Smiley mode
 const HAPPYFACE = '😋'
 const SADFACE = '🥹'
 const WINFACE = '😎'
@@ -28,9 +18,6 @@ var gLevel = { Size: 4, Mines: 2 } // Default value
 // secsPassed: How many seconds passed
 /* gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 } */
 var gGame
-
-var gStartTime
-var gTimeInterval
 
 //? DONE: This is called when page loads
 function initGame() {
@@ -98,10 +85,4 @@ function gameIsOver() {
   stopIntervals()
   const elFace = document.querySelector('.face')
   elFace.innerText = gGame.isWinning ? WINFACE : SADFACE
-}
-
-function stopIntervals() {
-  //? DONE: Stop Time
-  clearInterval(gTimeInterval)
-  resetTime()
 }

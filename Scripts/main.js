@@ -122,8 +122,27 @@ function countNeighbors(board, cellI, cellJ) {
 function renderCell(location, value) {
   //* location should be an object like this: { i: 2, j: 7 }
   // Select the elCell and set the value
-  if (value === 0) value = '\t' //? DONE: Change to space/tab
   const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+  switch (value) {
+    case 0:
+      value = ' ' //? DONE: Change to space/tab
+      break
+    case 1:
+      elCell.style.color = 'blue'
+      break
+    case 2:
+      elCell.style.color = 'green'
+      break
+    case 3:
+      elCell.style.color = 'red'
+      break
+    case 4:
+      elCell.style.color = 'purple'
+      break
+    default:
+      elCell.style.color = 'yellow'
+      break
+  }
   elCell.innerHTML = value
 }
 

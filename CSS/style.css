@@ -33,6 +33,7 @@ td {
 
 .cell {
   /* white-space: nowrap; */
+  padding: auto;
 
   /* font-size: XX-large; */
   padding: 4px;

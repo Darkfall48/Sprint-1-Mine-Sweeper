@@ -9,6 +9,21 @@
   </head>
   <body onload="initGame()">
     <h1>Mine Sweeper</h1>
+    <div>
+      <button class="difficulty easy" onclick="setDifficulty(3, 1)">
+        Easy
+      </button>
+      <button class="difficulty medium" onclick="setDifficulty(4, 2)">
+        Medium
+      </button>
+      <button class="difficulty hard" onclick="setDifficulty(5, 8)">
+        Hard
+      </button>
+      <button class="difficulty master" onclick="setDifficulty(6, 12)">
+        Master
+      </button>
+    </div>
+    <button class="face" onclick="initGame()">😋</button>
     <div class="board-table"></div>
     <!--? DONE: Add a footer at the bottom of the page with your full name. -->
     <footer>

@@ -15,7 +15,7 @@ const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
-var gLevel
+var gLevel = { Size: 4, Mines: 2 }
 
 //* This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play
@@ -33,10 +33,14 @@ function initGame() {
   renderBoard(gBoard, '.board-table')
 }
 
+function setDifficulty(size = 4, minesNb = 2) {
+  gLevel = { Size: size, Mines: minesNb }
+  initGame()
+}
+
 function buildBoard() {
   //? DONE: Builds the board
   gIsMinesOnBoard = false
-  gLevel = { Size: 4, Mines: 2 }
   gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
   //? DONE: Set mines manually on the board
   //   gBoard[1][2] = createMine()

@@ -7,6 +7,33 @@ body {
   background-color: aliceblue;
 }
 
+.face {
+  background-color: aliceblue;
+  margin: 20px;
+  font-size: xx-large;
+  border-radius: 25px;
+  border-width: 1px;
+  height: 50px;
+  width: 50px;
+  padding: 1px;
+}
+
+.face:hover {
+  font-size: x-large;
+}
+
+.difficulty {
+  font-size: large;
+  background-color: rgb(255, 212, 212);
+}
+
+.difficulty:hover {
+  background-color: pink;
+}
+.difficulty:active {
+  font-size: smaller;
+}
+
 /* ? DONE: Add a footer at the bottom of the page with your full name. */
 footer {
   height: 500px;
@@ -34,19 +61,6 @@ table {
   margin-right: auto;
 }
 
-.board-table {
-  /* ? DONE: cells are squares */
-}
-
-td {
-  white-space: nowrap;
-  text-align: center;
-}
-
-tr {
-  white-space: nowrap;
-}
-
 .cell {
   /* white-space: nowrap; */
   /*? TODO DONE: cells are squares */
@@ -54,5 +68,6 @@ tr {
   min-height: 2rem;
   max-width: 2rem;
   min-width: 2rem;
+  text-align: center;
   /* font-size: XX-large; */
 }

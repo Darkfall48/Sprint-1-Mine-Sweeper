@@ -13,6 +13,8 @@ const EMPTY = '///'
 //? DONE: Mines look like mines.
 const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
 const FLAG = '🚩'
+const HAPPYFACE = '😋'
+const SADFACE = '🥹'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -31,6 +33,8 @@ var gTimeInterval
 
 //? DONE: This is called when page loads
 function initGame() {
+  const elFace = document.querySelector('.face')
+  elFace.innerText = HAPPYFACE
   // Stopping all the intervals
   stopIntervals()
   // initializing variables:
@@ -202,11 +206,13 @@ function cellClicked(elCell, i, j) {
 
   //? DONE: User can click only if the game is ON and if the cell is not shown
   //* Prevent future bugs
+  if (gBoard[i][j].isShown) return
+  //? DONE: Prevent the user to reveal a flagged cell
+  if (gBoard[i][j].isMarked) return
   if (!gGame.isOn) {
     gGame.isOn = true
     startTimer()
   }
-  if (gBoard[i][j].isShown) return
 
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
   if (!gIsMinesOnBoard) {
@@ -224,6 +230,7 @@ function cellClicked(elCell, i, j) {
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
     // TODO: Game Over!
+    gameIsOver()
     // TODO: Reveal all mines
   } else {
     //* DONE: Count neighbors
@@ -287,6 +294,24 @@ function updateShownCount(value) {
 
 function checkGameOver() {
   // TODO: Game ends when all mines are marked, and all the other cells are shown
+}
+function gameIsOver() {
+  revealMines(gBoard)
+  stopIntervals()
+  const elFace = document.querySelector('.face')
+  elFace.innerText = SADFACE
+}
+
+function revealMines(board) {
+  for (var i = 0; i < board.length; i++) {
+    for (var j = 0; j < board[0].length; j++) {
+      if (board[i][j].isMine) {
+        board[i][j].isShown = true
+        renderCell({ i, j }, MINE)
+      }
+    }
+  }
+  console.log('Mines revealed')
 }
 
 function expandShown(board, elCell, i, j) {

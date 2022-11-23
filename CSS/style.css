@@ -3,11 +3,13 @@
 }
 
 .board-table {
-  position: absolute;
-  right: 40%;
+  /* position: absolute;
+  /* right: 40%; */
 }
 
 .cell {
+  height: 30px;
+  width: 30px;
   font-size: XX-large;
   padding: 4px;
 }

@@ -34,7 +34,7 @@ function initGame() {
 function buildBoard() {
   //? DONE: Builds the board
   gIsMinesOnBoard = false
-  gLevel = { Size: 4, Mines: 2 }
+  gLevel = { Size: 6, Mines: 2 }
   gBoard = createBoard(gLevel.Size) // TODO: Change '4' to difficulties
   //? DONE: Set mines manually on the board
   //   gBoard[1][2] = createMine()
@@ -96,7 +96,7 @@ function setMinesNegsCount(board) {
       }
     }
   }
-  // TODO: Have a console log to help with the debug
+  //? DONE: Have a console log to help with the debug
   console.log(board)
 }
 
@@ -165,6 +165,8 @@ function cellClicked(elCell, i, j) {
     setRandomMines()
     gIsMinesOnBoard = true
   }
+
+  // TODO: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
 
   //* Prevent future bugs
   if (gBoard[i][j].isShown) return

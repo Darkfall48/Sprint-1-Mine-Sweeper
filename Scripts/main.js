@@ -15,6 +15,7 @@ const MINE = '<img src="Img/mine.png" height="32px" alt="mine">'
 const FLAG = '🚩'
 const HAPPYFACE = '😋'
 const SADFACE = '🥹'
+const WINFACE = '😎'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -53,8 +54,10 @@ function buildBoard() {
   //? DONE: Builds the board
   gGame = {
     isOn: false,
+    isStarted: true,
     showCount: 0,
     markedCount: 0,
+    goodFlaggedCount: 0,
     secsPassed: 0,
   }
   gIsMinesOnBoard = false
@@ -209,9 +212,12 @@ function cellClicked(elCell, i, j) {
   if (gBoard[i][j].isShown) return
   //? DONE: Prevent the user to reveal a flagged cell
   if (gBoard[i][j].isMarked) return
-  if (!gGame.isOn) {
+  if (!gGame.isOn && gGame.isStarted) {
     gGame.isOn = true
     startTimer()
+    return
+  } else if (!gGame.isOn && !gGame.isStarted) {
+    return
   }
 
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
@@ -229,9 +235,8 @@ function cellClicked(elCell, i, j) {
   //* Update the DOM
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
-    // TODO: Game Over!
+    //? DONE: Game Over!
     gameIsOver()
-    // TODO: Reveal all mines
   } else {
     //* DONE: Count neighbors
     setMinesNegsCount(gBoard)
@@ -247,9 +252,12 @@ function cellMarked(elCell, cellI, cellJ) {
   //? DONE: Search the web (and implement) how to hide the context menu on right click
   //? DONE: User can click only if the game is ON and if the cell is not shown
   //* Prevent future bugs
-  if (!gGame.isOn) {
+  if (!gGame.isOn && gGame.isStarted) {
     gGame.isOn = true
     startTimer()
+    return
+  } else if (!gGame.isOn && !gGame.isStarted) {
+    return
   }
   if (gBoard[cellI][cellJ].isShown) return
   //   console.log("It's right!")
@@ -257,18 +265,30 @@ function cellMarked(elCell, cellI, cellJ) {
   //? DONE: Called on right click to mark a cell (suspected to be a mine)
   // When the cell is unmarked:
   if (!gBoard[cellI][cellJ].isMarked) {
+    //? Done: Check if a good mine is flagged
+    if (gBoard[cellI][cellJ].isMine) {
+      gGame.goodFlaggedCount++
+      checkGameOver()
+      console.log('Good flagged mine count:', gGame.goodFlaggedCount)
+    }
     elCell.innerHTML = FLAG
     gBoard[cellI][cellJ].isMarked = true
-    console.log('This cell is marked')
+    // console.log('This cell is marked')
     updateMarkedCount('+1')
-    console.log('Marked count:', gGame.markedCount)
+    // console.log('Marked count:', gGame.markedCount)
   } else {
+    //? Done: Check if a good mine is unFlagged
+    if (gBoard[cellI][cellJ].isMine) {
+      gGame.goodFlaggedCount--
+      checkGameOver()
+      console.log('Good flagged mine count:', gGame.goodFlaggedCount)
+    }
     //When the cell is already marked
     elCell.innerHTML = EMPTY
     gBoard[cellI][cellJ].isMarked = false
-    console.log('This cell is unmarked')
+    // console.log('This cell is unmarked')
     updateMarkedCount('-1')
-    console.log('Marked count:', gGame.markedCount)
+    // console.log('Marked count:', gGame.markedCount)
   }
 }
 
@@ -293,15 +313,32 @@ function updateShownCount(value) {
 }
 
 function checkGameOver() {
-  // TODO: Game ends when all mines are marked, and all the other cells are shown
+  //? DONE: Game ends when all mines are marked
+  if (+gGame.goodFlaggedCount === +gLevel.Mines) {
+    console.log('You Win!!!')
+    const elFace = document.querySelector('.face')
+    elFace.innerText = WINFACE
+    gameIsOver()
+  }
+  //? DONE: and all the other cells are shown
+  var emptyCount = gLevel.Size * gLevel.Size - gLevel.Mines
+  if (gGame.showCount === emptyCount) {
+    console.log('You Win!!!')
+    const elFace = document.querySelector('.face')
+    elFace.innerText = WINFACE
+    gameIsOver()
+  }
 }
 function gameIsOver() {
+  gGame.isOn = false
+  gGame.isStarted = false
   revealMines(gBoard)
   stopIntervals()
   const elFace = document.querySelector('.face')
   elFace.innerText = SADFACE
 }
 
+//? DONE: Reveal all mines
 function revealMines(board) {
   for (var i = 0; i < board.length; i++) {
     for (var j = 0; j < board[0].length; j++) {
@@ -341,6 +378,7 @@ function startTimer() {
     const seconds = (Date.now() - gStartTime) / 1000
     var elTime = document.querySelector('.time')
     elTime.innerText = seconds.toFixed(2)
+    gGame.secsPassed = seconds.toFixed(2)
   }, 1)
 }
 

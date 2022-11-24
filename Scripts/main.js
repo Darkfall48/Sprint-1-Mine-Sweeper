@@ -67,7 +67,7 @@ function checkGameOver() {
   //? DONE: Game ends when all mines are marked
   //? DONE: and all the other cells are shown
   var emptyCount = gLevel.Size * gLevel.Size - gLevel.Mines
-  console.log(emptyCount)
+  //   console.log(emptyCount)
   if (
     +gGame.goodFlaggedCount === +gLevel.Mines ||
     +gGame.showCount === +emptyCount

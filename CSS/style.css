@@ -1,10 +1,11 @@
 * {
   text-align: center;
   transition: 200ms;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  background-color: aliceblue;
+  background-color: rgb(137, 220, 250);
 }
 
 .time {
@@ -12,6 +13,7 @@ body {
 }
 
 .face {
+  animation: faceAnime 3s ease 5s infinite alternate-reverse both;
   background-color: aliceblue;
   margin: 20px;
   font-size: xx-large;
@@ -24,6 +26,38 @@ body {
   /* text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5); */
 }
 
+@keyframes faceAnime {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+
+  10% {
+    transform: rotate(2deg);
+  }
+
+  20%,
+  40%,
+  60% {
+    transform: rotate(-4deg);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: rotate(4deg);
+  }
+
+  80% {
+    transform: rotate(-2deg);
+  }
+
+  90% {
+    transform: rotate(2deg);
+  }
+}
+
 .face:hover {
   font-size: x-large;
   cursor: pointer;
@@ -34,7 +68,8 @@ body {
   background-color: rgb(255, 212, 212);
   border-radius: 6px;
   border-width: 2px;
-  box-shadow: 2px 2px 2px rgb(177, 175, 175);
+  /* box-shadow: 2px 2px 2px rgba(201, 201, 201, 0.763); */
+  filter: drop-shadow(1px 1px 1px rgba(83, 83, 83, 0.749));
 }
 
 .difficulty:hover {
@@ -52,12 +87,14 @@ footer {
   width: 100%;
   left: 0px;
   position: fixed;
-  padding-bottom: 420px;
-  background-color: lightblue;
+  background-color: #00b4d8;
 }
 
 footer h2 {
-  color: rgb(63, 43, 43);
+  font-size: large;
+  color: whitesmoke;
+  padding-top: 5px;
+  margin: auto;
 }
 
 /*? DONE: Board keeps its position (shouldn't move) along all game phases */
@@ -68,6 +105,8 @@ footer h2 {
   height: 400px;
   margin-left: auto;
   margin-right: auto;
+  background-color: aliceblue;
+  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
 }
 
 .cell {
@@ -89,6 +128,7 @@ footer h2 {
   margin-right: auto; */
   /* font-size: XX-large; */
   cursor: crosshair;
+  background-color: aliceblue;
 }
 
 /* .isMarked {
@@ -105,11 +145,16 @@ footer h2 {
   margin-right: auto;
   table-layout: fixed;
   width: 400px;
+  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
 }
 .pannel td {
   padding: 10px;
 }
 
 .dark {
-  background-color: rgb(180, 208, 218);
+  background-color: lightsteelblue;
+}
+
+.red {
+  background-color: lightcoral;
 }

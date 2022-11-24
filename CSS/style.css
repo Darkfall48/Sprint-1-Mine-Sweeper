@@ -115,9 +115,9 @@ footer h2 {
 
 .dark-mode-button {
   font-size: xx-large;
-  position: absolute;
-  margin: auto;
-  top: 10%;
+  /* position: absolute; */
+  /* margin: auto; */
+  /* top: 10%; */
   background-color: transparent;
   border-width: 0px;
 }
@@ -128,10 +128,10 @@ footer h2 {
 }
 .score-button {
   font-size: xx-large;
-  position: absolute;
-  left: 20%;
-  margin: auto;
-  top: 10%;
+  /* position: absolute; */
+  /* margin-left: 5%; */
+  /* margin: auto; */
+  /* top: 10%; */
   background-color: transparent;
   border-width: 0px;
 }
@@ -142,6 +142,10 @@ footer h2 {
 }
 
 /* ---- Panel ---- */
+
+.head-pannel {
+  margin: auto;
+}
 
 .time {
   color: rgb(245, 81, 21);

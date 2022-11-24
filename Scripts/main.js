@@ -13,7 +13,7 @@ const HINT = '💡'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
-var gLevel = { Size: 4, Mines: 2 } // Default value
+var gLevel = { Size: 4, Mines: 2, Lives: 1 } // Default value
 
 //* This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play

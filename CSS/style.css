@@ -44,7 +44,7 @@ body.dark-mode {
 
   --button-face-bg: #f0f8ff;
   --button-difficulty-bg: #436ead;
-  --button-difficulty-border-color: grey;
+  --button-difficulty-border-color: #808080;
   --button-difficulty-dShadow: #285513bf;
   --button-hover-difficulty-bg: #5876ef;
   --button-darkmode-bg: transparent;
@@ -57,9 +57,9 @@ body.dark-mode {
   --table-board-score-bg: #4d789e;
   --table-board-score-dShadow: #bcadad;
   --table-board-cell-bg: #599bb5;
-  --table-board-cell-dark-bg: #;
+  --table-board-cell-dark-bg: #5d7d92;
   --table-board-cell-red-bg: #a35353;
-  --table-score-cell-bg: #566c7e;
+  --table-score-cell-bg: #5d7a92;
 
   --footer-bg: #416aa4;
   --footer-dshadow: #ffffff9c;
@@ -71,6 +71,38 @@ body.dark-mode {
 
 .title {
   color: var(--body-title-text-color);
+}
+
+.animate-title {
+  animation: title 10s ease-in-out 16s 10 alternate-reverse both;
+}
+
+@keyframes title {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+
+  15% {
+    transform: translateX(-30px) rotate(6deg);
+  }
+
+  30% {
+    transform: translateX(15px) rotate(-6deg);
+  }
+
+  45% {
+    transform: translateX(-15px) rotate(3.6deg);
+  }
+
+  60% {
+    transform: translateX(9px) rotate(-2.4deg);
+  }
+
+  75% {
+    transform: translateX(-6px) rotate(1.2deg);
+  }
 }
 
 /* ? DONE: Add a footer at the bottom of the page with your full name. */
@@ -171,6 +203,7 @@ footer h2 {
 }
 
 .dark-mode-button {
+  animation: dark-mode-button 4s ease 2s infinite alternate-reverse both;
   font-size: xx-large;
   /* position: absolute; */
   /* margin: auto; */
@@ -179,18 +212,76 @@ footer h2 {
   border-width: 0px;
 }
 
+@keyframes dark-mode-button {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}
+
 .dark-mode-button:hover {
   opacity: 50%;
   cursor: pointer;
 }
+
 .score-button {
+  animation: score-button 6s ease 12s 10 alternate-reverse both;
   font-size: xx-large;
+  background-color: var(--button-score-bg);
+  border-width: 0px;
   /* position: absolute; */
   /* margin-left: 5%; */
   /* margin: auto; */
   /* top: 10%; */
-  background-color: var(--button-score-bg);
-  border-width: 0px;
+}
+
+@keyframes score-button {
+  /* 0% {
+    animation-timing-function: ease-in;
+    opacity: 1;
+    transform: translateY(-45px);
+  } */
+
+  24% {
+    opacity: 1;
+  }
+
+  40% {
+    animation-timing-function: ease-in;
+    transform: translateY(-24px);
+  }
+
+  65% {
+    animation-timing-function: ease-in;
+    transform: translateY(-12px);
+  }
+
+  82% {
+    animation-timing-function: ease-in;
+    transform: translateY(-6px);
+  }
+
+  93% {
+    animation-timing-function: ease-in;
+    transform: translateY(-4px);
+  }
+
+  25%,
+  55%,
+  75%,
+  87% {
+    animation-timing-function: ease-out;
+    transform: translateY(0px);
+  }
+
+  100% {
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 .score-button:hover {

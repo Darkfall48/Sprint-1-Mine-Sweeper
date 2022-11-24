@@ -61,6 +61,6 @@ function checkWebStorage() {
     console.log('Sorry, your browser does not support Web Storage')
     return
   } else {
-    console.log('Be happy, your browser support Web Storage!')
+    console.log("Your browser support Web Storage, that's cool!")
   }
 }

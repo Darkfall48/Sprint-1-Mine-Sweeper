@@ -11,6 +11,8 @@ const LIVE = '💖'
 const DEAD = '☠️'
 const HINT =
   '<span onclick="onHints()" style="cursor: not-allowed" title="Not ready Yet!">💡</span>'
+const MOON = '🌛'
+const SUN = '🌞'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -152,7 +154,13 @@ function gameIsOver() {
 //? DONE: Implement Dark-Mode for the game
 function toggleDarkMode() {
   const elBody = document.querySelector('body')
-  elBody.classList.toggle('dark-mode')
+  var isDark = elBody.classList.toggle('dark-mode')
+  const elDarkButton = document.querySelector('.dark-mode-button')
+  if (isDark) {
+    elDarkButton.innerText = SUN
+  } else {
+    elDarkButton.innerText = MOON
+  }
 }
 
 //? DONE: Keep the best score in local storage (per level)
@@ -173,6 +181,7 @@ function storeBestScore() {
 
     const user = { Level: localLevel, Score: localScore }
     console.log(user)
+    //! KNOWN ISSUE: Work only without reloading the page (so it's not working..)
     gBestScore.push(user)
   }
   //* Render the score

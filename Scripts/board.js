@@ -231,7 +231,7 @@ function cellClicked(elCell, i, j) {
   }
 
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
-  //! KNOWN ISSUE: It's not working, before it was.
+  //! KNOWN ISSUE: It's not working, the user can still encounter a mine at first click. It was working before.
   if (!gIsMinesOnBoard) {
     setRandomMines()
     gIsMinesOnBoard = true

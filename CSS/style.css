@@ -35,8 +35,8 @@ footer h2 {
 /* ---- Dark Mode ---- */
 
 .dark-mode {
-  background-color: black;
-  color: greenyellow;
+  background-color: rgb(75, 72, 72);
+  color: rgb(157, 212, 76);
 }
 
 /* ---- Buttons ---- */

@@ -1,6 +1,6 @@
 'use strict'
 
-// TODO: Variables:
+//? DONE: Variables:
 
 //* Smiley mode
 const HAPPYFACE = '😋'
@@ -9,7 +9,8 @@ const WINFACE = '😎'
 //* Lives
 const LIVE = '💖'
 const DEAD = '☠️'
-const HINT = '<span onclick="onHints()" style="cursor: pointer">💡</span>'
+const HINT =
+  '<span onclick="onHints()" style="cursor: not-allowed" title="Not ready Yet!">💡</span>'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */

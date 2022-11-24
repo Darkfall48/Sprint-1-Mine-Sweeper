@@ -8,32 +8,53 @@
     <title>Sprint 1 by Sidney Sebban</title>
   </head>
   <body onload="initGame()" oncontextmenu="return false">
-    <h1>Mine Sweeper</h1>
+    <h1 title="Made By Sidney Sebban">Mine Sweeper</h1>
     <div>
-      <button class="score-button" onclick="showScore()">🏆</button>
-      <button class="difficulty easy" onclick="setDifficulty(4, 2,1, 'Easy')">
+      <button
+        class="score-button"
+        onclick="showScore()"
+        title="Open/Close the Score Menu"
+      >
+        🏆
+      </button>
+      <button
+        class="difficulty easy"
+        onclick="setDifficulty(4, 2,1, 'Easy')"
+        title="Choose the difficulty"
+      >
         Easy
       </button>
       <button
         class="difficulty medium"
         onclick="setDifficulty(8, 14,3, 'Medium')"
+        title="Choose the difficulty"
       >
         Medium
       </button>
-      <button class="difficulty hard" onclick="setDifficulty(12, 32,5,'Hard')">
+      <button
+        class="difficulty hard"
+        onclick="setDifficulty(12, 32,5,'Hard')"
+        title="Choose the difficulty"
+      >
         Hard
       </button>
 
-      <button class="dark-mode-button" onclick="toggleDarkMode()">🌛</button>
+      <button
+        class="dark-mode-button"
+        onclick="toggleDarkMode()"
+        title="Toggle DarkMode"
+      >
+        🌛
+      </button>
     </div>
     <table class="pannel" border="1">
       <tbody>
         <tr>
           <td>
-            <h2>Lives: <span class="lives"></span></h2>
+            <h2 title="Lives left">Lives: <span class="lives"></span></h2>
           </td>
           <td>
-            <h2><span class="hints"></span> :Hints</h2>
+            <h2 title="Hints left"><span class="hints"></span> :Hints</h2>
           </td>
         </tr>
       </tbody>
@@ -42,14 +63,14 @@
       <tbody>
         <tr>
           <td>
-            <h2>🚩: <span class="marked">0</span></h2>
-            <h2>🔎: <span class="shown">0</span></h2>
+            <h2 title="Flags left">🚩: <span class="marked">0</span></h2>
+            <h2 title="Cells checked">🔎: <span class="shown">0</span></h2>
           </td>
           <td>
             <button class="face" onclick="setDifficulty()">😋</button>
           </td>
           <td>
-            <h2>
+            <h2 title="Time count">
               ⏰<br />
               <br /><span class="time">00</span>
             </h2>
@@ -71,7 +92,7 @@
     </div>
     <!--? DONE: Add a footer at the bottom of the page with your full name. -->
     <footer>
-      <h2>Made by Sidney Sebban</h2>
+      <h2 title="That's me!">Made by Sidney Sebban</h2>
     </footer>
 
     <div>

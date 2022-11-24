@@ -5,9 +5,7 @@
   transition: 200ms;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-:root {
-  /* color-scheme: revert-layer; */
-}
+
 body {
   /** Light Mode Theme*/
   --body-bg: #89dcfa;
@@ -28,7 +26,7 @@ body {
   --table-board-score-bg: #f0f8ff;
   --table-board-score-dShadow: #535353bf;
   --table-board-cell-bg: #e8f1ff;
-  --table-board-cell-dark-bg: #b0c4de;
+  --table-board-cell-dark-bg: #cad9ee;
   --table-board-cell-red-bg: #f08080;
   --table-score-cell-bg: #e8f1ff;
 
@@ -40,7 +38,7 @@ body {
   background-color: var(--body-bg);
 }
 body.dark-mode {
-  /** Light Mode Theme*/
+  /** Dark Mode Theme*/
   --body-bg: #494949; /*586069*/
   --body-title-text-color: #dcdee1;
 
@@ -273,6 +271,7 @@ footer h2 {
   background-color: var(--table-board-cell-bg);
 }
 
+/** When the cell in the board is clicked **/
 .dark {
   background-color: var(--table-board-cell-dark-bg);
 }

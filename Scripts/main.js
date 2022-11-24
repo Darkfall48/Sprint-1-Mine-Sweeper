@@ -32,9 +32,16 @@ var gisScoreShown = false
 var gGame
 
 //? DONE: This is called when page loads
-function initGame() {
+function checkBrowser() {
+  console.log('Page Loaded')
   //* First lets check if the user can use Web Storage
   checkWebStorage()
+  //* Now, let's initialize the game!
+  initGame()
+}
+
+//? DONE: Initialize the game
+function initGame() {
   // Hide the scrollbar (just because I don't like it)
   hideScrollbar()
   // Because of CSS problem, I decided to use the Zoom out (CTRL+-) from the page of the user
@@ -45,7 +52,6 @@ function initGame() {
   stopIntervals()
   // initializing variables:
   gBoard = []
-  console.log('Page Loaded')
   buildBoard()
   renderBoard(gBoard, '.board-table')
   updateMarkedCount(gLevel.Mines)
@@ -151,7 +157,6 @@ function toggleDarkMode() {
 
 //? DONE: Keep the best score in local storage (per level)
 function storeBestScore() {
-  checkWebStorage()
   //* Check if the user Win
   if (!gGame.isOn && gGame.isWinning) {
     // console.log(gGame.secsPassed)
@@ -172,16 +177,6 @@ function storeBestScore() {
   }
   //* Render the score
   renderScore()
-}
-
-//* Check if the user can use that feature
-function checkWebStorage() {
-  if (typeof Storage === 'undefined') {
-    console.log('Sorry, your browser does not support Web Storage')
-    return
-  } else {
-    console.log('Be happy, your browser support Web Storage!')
-  }
 }
 
 //? DONE: Show the score panel with scores rendered

@@ -54,3 +54,13 @@ function getRandomColor() {
       .toUpperCase()
   return randomColor
 }
+
+//? Check if the user can use Web Storage
+function checkWebStorage() {
+  if (typeof Storage === 'undefined') {
+    console.log('Sorry, your browser does not support Web Storage')
+    return
+  } else {
+    console.log('Be happy, your browser support Web Storage!')
+  }
+}

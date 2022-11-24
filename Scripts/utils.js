@@ -10,7 +10,7 @@ function stopIntervals() {
   resetTime()
 }
 
-//? Create a timer
+//? DONE: Create a timer
 function startTimer() {
   gStartTime = Date.now()
   gTimeInterval = setInterval(() => {
@@ -21,13 +21,13 @@ function startTimer() {
   }, 1)
 }
 
-//? Reset the timer
+//? DONE: Reset the timer
 function resetTime() {
   var elTime = document.querySelector('.time')
   elTime.innerText = '0'
 }
 
-//? Play the audio file once created
+//? DONE: Play the audio file once created
 function playAudio(audioFile) {
   //* Use createAudio() before using this function
   //* Make the audio file playable
@@ -36,10 +36,21 @@ function playAudio(audioFile) {
   elAudioFile.play()
 }
 
-//? Return a random integer
+//? DONE: Return a random integer
 function getRandomInt(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min) + min)
   //*The maximum is exclusive and the minimum is inclusive
+}
+
+//? DONE: Return a random color
+function getRandomColor() {
+  var randomColor =
+    '#' +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+      .toUpperCase()
+  return randomColor
 }

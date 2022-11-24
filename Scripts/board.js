@@ -34,12 +34,12 @@ function buildBoard() {
   //* Already used in @cellClicked()
   //   setMinesNegsCount(gBoard)
 
-  // TODO: Return the created board
+  //? TODO DONE: Return the created board
   //* I don't need it
 }
 
+//? DONE: Set mines at random locations
 function setRandomMines() {
-  //? DONE: Set mines at random locations
   //! Bug known, random I and J can get the same position more than once, resulting having less mines than expected
   for (var i = 0; i < gLevel.Mines; i++) {
     var randomIdxI = getRandomInt(0, gBoard.length)
@@ -48,6 +48,7 @@ function setRandomMines() {
   }
 }
 
+//? DONE: Create the blanc board by the difficulty the user chooses
 function createBoard(boardSize) {
   var board = []
   for (var i = 0; i < boardSize; i++) {
@@ -64,6 +65,7 @@ function createBoard(boardSize) {
   return board
 }
 
+//? DONE: Create the mine object
 function createMine() {
   var mine = {
     idx: gNextMineIdx++,
@@ -86,9 +88,9 @@ function revealMines(board) {
   console.log('All mines revealed')
 }
 
+//? DONE: Count mines around each cell
 function setMinesNegsCount(board) {
   var negsCount = 0
-  //? DONE: Count mines around each cell
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[0].length; j++) {
       //?DONE: Only if is shown and not isMine
@@ -105,7 +107,7 @@ function setMinesNegsCount(board) {
   //   console.log(board)
 }
 
-//? Count how many mines nears the cell and return the value
+//? DONE: Count how many mines are nears the cell and return the value
 function countNeighbors(board, cellI, cellJ) {
   var neighborsCount = 0
   for (var i = cellI - 1; i <= cellI + 1; i++) {
@@ -123,8 +125,8 @@ function countNeighbors(board, cellI, cellJ) {
   return neighborsCount
 }
 
+//? DONE: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
 function expandShown(board, elCell, cellI, cellJ) {
-  //? DONE: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
   if (board[cellI][cellJ].minesAroundCount > 0) return
   //   console.log('board', board)
   //   console.log('elCell', elCell)
@@ -148,7 +150,7 @@ function expandShown(board, elCell, cellI, cellJ) {
       }
     }
   }
-  // ? BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)
+  // TODO: BONUS: if you have the time later, try to work more like the real algorithm (see description at the Bonuses section below)
 }
 
 //? Render the board in the index HTML
@@ -160,7 +162,7 @@ function renderBoard(board, selector) {
     for (var j = 0; j < board[0].length; j++) {
       var currentCell = board[i][j]
 
-      // Check if current cell is a mine and if he is supposed to be shown
+      //* Check if current cell is a mine and if he is supposed to be shown
       if (currentCell.isShown && currentCell.isMine) {
         currentCell = MINE
       } else {
@@ -177,6 +179,7 @@ function renderBoard(board, selector) {
   const elTable = document.querySelector(selector)
   elTable.innerHTML = strHTML
 }
+
 //? Render the cell in the index HTML
 function renderCell(location, value) {
   //* location should be an object like this: { i: 2, j: 7 }
@@ -262,7 +265,7 @@ function cellClicked(elCell, i, j) {
     updateShownCount('1')
     // console.log('Show count:', gGame.showCount)
     //
-    // TODO: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
+    //? DONE: BONUS: When an empty cell is clicked, open all empty cells that are connected and their numbered neighbors
     expandShown(gBoard, elCell, i, j)
   }
 

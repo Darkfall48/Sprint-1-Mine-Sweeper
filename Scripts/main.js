@@ -73,6 +73,7 @@ function updateHints(hintsNmb = 3) {
   }
 }
 
+//? DONE: Set the difficulty the user chooses
 function setDifficulty(size = 4, minesNb = 2, lives = 1, diffStr) {
   if (!diffStr) diffStr = 'Easy'
   gLevel = {
@@ -144,7 +145,7 @@ function toggleDarkMode() {
   elBody.classList.toggle('dark-mode')
 }
 
-//TODO: Keep the best score in local storage (per level)
+//? DONE: Keep the best score in local storage (per level)
 function storeBestScore() {
   //* First lets check if the user can use that feature
   if (typeof Storage === 'undefined') {
@@ -172,15 +173,17 @@ function storeBestScore() {
     console.log(user)
     gBestScore.push(user)
   }
+  //* Render the score
+  renderScore()
 }
 
-// Show the score panel with scores rendered
+//? DONE: Show the score panel with scores rendered
 function showScore() {
   const elTable = document.querySelector('.board-table')
   const elPannel = document.querySelectorAll('.pannel')
   const elDiffBtn = document.querySelectorAll('.difficulty')
   if (!gisScoreShown) {
-    // Show Score Panel with rendered scores
+    //* Show Score Panel with rendered scores
     renderScore()
     for (var i = 0; i < elPannel.length; i++) {
       const currentPannel = elPannel[i]
@@ -195,7 +198,7 @@ function showScore() {
     }
     gisScoreShown = true
   } else {
-    // Hide Score Panel
+    //* Hide Score Panel
     for (var i = 0; i < elPannel.length; i++) {
       const currentPannel = elPannel[i]
       currentPannel.classList.remove('hide')
@@ -211,7 +214,7 @@ function showScore() {
   }
 }
 
-// Render the scores in the index HTML
+//? DONE: Render the scores in the index HTML
 function renderScore() {
   if (!gBestScore) return
   var strHTML = ''
@@ -219,9 +222,10 @@ function renderScore() {
   for (let i = 0; i < gBestScore.length; i++) {
     const currentLevel = gBestScore[i].Level
     const currentScore = gBestScore[i].Score
+    var randomColor = getRandomColor()
     strHTML += `<tr>
-      <td>${currentLevel}</td>
-      <td>${currentScore}</td>
+      <td class="score" style="color:${randomColor}">${currentLevel}</td>
+      <td class="score" style="color:${randomColor}">${currentScore}</td>
     </tr>`
   }
 
@@ -229,7 +233,7 @@ function renderScore() {
   elRenderScore.innerHTML = strHTML
 }
 
-//? Hide the scroll bar (because I don't like it)
+//? DONE: Hide the scroll bar (because I don't like it)
 function hideScrollbar() {
   var style = document.createElement('style')
   style.innerHTML = `body::-webkit-scrollbar {display: none;}`

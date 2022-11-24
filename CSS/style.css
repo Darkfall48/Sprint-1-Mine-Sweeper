@@ -1,3 +1,5 @@
+/* ---- HTML BODY ---- */
+
 * {
   text-align: center;
   transition: 200ms;
@@ -8,9 +10,36 @@ body {
   background-color: rgb(137, 220, 250);
 }
 
-.time {
-  color: rgb(245, 81, 21);
+/* ? DONE: Add a footer at the bottom of the page with your full name. */
+footer {
+  height: 500px;
+  width: 100%;
+  left: 0px;
+  top: 95%;
+  position: fixed;
+  background-color: #00b4d8;
+  filter: drop-shadow(0px 1px 3px rgb(0, 0, 0));
 }
+
+footer h2 {
+  font-size: large;
+  color: whitesmoke;
+  padding-top: 5px;
+  margin: auto;
+}
+
+.hide {
+  display: none;
+}
+
+/* ---- Dark Mode ---- */
+
+.dark-mode {
+  background-color: black;
+  color: greenyellow;
+}
+
+/* ---- Buttons ---- */
 
 .face {
   animation: faceAnime 3s ease 5s infinite alternate-reverse both;
@@ -26,6 +55,11 @@ body {
   padding: 1px;
   /* text-shadow: drop-shadow(5px 5px 10px #000); */
   /* text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5); */
+}
+
+.face:hover {
+  font-size: x-large;
+  cursor: pointer;
 }
 
 @keyframes faceAnime {
@@ -60,11 +94,6 @@ body {
   }
 }
 
-.face:hover {
-  font-size: x-large;
-  cursor: pointer;
-}
-
 .difficulty {
   font-size: large;
   background-color: rgb(255, 212, 212);
@@ -82,88 +111,6 @@ body {
 }
 .difficulty:active {
   font-size: smaller;
-}
-
-/* ? DONE: Add a footer at the bottom of the page with your full name. */
-footer {
-  height: 500px;
-  width: 100%;
-  left: 0px;
-  top: 95%;
-  position: fixed;
-  background-color: #00b4d8;
-  filter: drop-shadow(0px 1px 3px rgb(0, 0, 0));
-}
-
-footer h2 {
-  font-size: large;
-  color: whitesmoke;
-  padding-top: 5px;
-  margin: auto;
-}
-
-/*? DONE: Board keeps its position (shouldn't move) along all game phases */
-.board,
-.score-board {
-  /* background-image: linear-gradient(#38b6ff, #00d4ff); */
-  table-layout: fixed;
-  width: 400px;
-  height: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: aliceblue;
-  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
-}
-
-.cell {
-  /* white-space: nowrap; */
-  /*? TODO DONE: cells are squares */
-  /* max-height: 50px;
-  min-height: 50px;
-  max-width: 25px;
-  min-width: 25px; */
-  /* table-layout: fixed; */
-  /* min-width: auto;
-  min-height: auto; */
-  width: 25px;
-  height: 25px;
-  text-align: center;
-  padding: auto;
-  font-size: 24px;
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* font-size: XX-large; */
-  cursor: crosshair;
-  background-color: rgb(232, 241, 255);
-}
-
-/* .isMarked {
-  background-color: lightblue;
-} */
-
-.pannel {
-  background-color: aliceblue;
-  /* margin-bottom: 15px;
-  margin-top: 10px; */
-  height: fit-content;
-  width: fit-content;
-  font-size: small;
-  margin-left: auto;
-  margin-right: auto;
-  table-layout: fixed;
-  width: 400px;
-  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
-}
-.pannel td {
-  padding: auto;
-}
-
-.dark {
-  background-color: lightsteelblue;
-}
-
-.red {
-  background-color: lightcoral;
 }
 
 .dark-mode-button {
@@ -194,11 +141,79 @@ footer h2 {
   cursor: pointer;
 }
 
-.dark-mode {
-  background-color: black;
-  color: greenyellow;
+/* ---- Panel ---- */
+
+.time {
+  color: rgb(245, 81, 21);
 }
 
-.hide {
-  display: none;
+.pannel {
+  background-color: aliceblue;
+  /* margin-bottom: 15px;
+    margin-top: 10px; */
+  height: fit-content;
+  width: fit-content;
+  font-size: small;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed;
+  width: 400px;
+  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
+}
+
+.pannel td {
+  padding: auto;
+}
+
+.score {
+  font-size: x-large;
+}
+
+.score-board tbody tr td {
+  background-color: rgb(232, 241, 255);
+}
+
+/* ---- Board ---- */
+
+/*? DONE: Board keeps its position (shouldn't move) along all game phases */
+.board,
+.score-board {
+  /* background-image: linear-gradient(#38b6ff, #00d4ff); */
+  table-layout: fixed;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: aliceblue;
+  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
+}
+
+.cell {
+  /* white-space: nowrap; */
+  /*? TODO DONE: cells are squares */
+  /* max-height: 50px;
+    min-height: 50px;
+    max-width: 25px;
+    min-width: 25px; */
+  /* table-layout: fixed; */
+  /* min-width: auto;
+    min-height: auto; */
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  padding: auto;
+  font-size: 24px;
+  /* margin-left: auto;
+    margin-right: auto; */
+  /* font-size: XX-large; */
+  cursor: crosshair;
+  background-color: rgb(232, 241, 255);
+}
+
+.dark {
+  background-color: lightsteelblue;
+}
+
+.red {
+  background-color: lightcoral;
 }

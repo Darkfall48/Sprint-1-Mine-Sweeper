@@ -5,9 +5,37 @@
   transition: 200ms;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+:root {
+  /* color-scheme: revert-layer; */
+}
 body {
-  background-color: rgb(137, 220, 250);
+  /** Light Mode Theme*/
+  --body-bg: #89dcfa;
+
+  --button-face-bg: #f0f8ff;
+  --button-difficulty-bg: #ffd4d4;
+  --button-difficulty-dShadow: #535353bf;
+  --button-hover-difficulty-bg: #ffc0cb;
+  --button-darkmode-bg: transparent;
+  --button-score-bg: transparent;
+
+  --panel-time-text-color: #f55115;
+
+  --table-panel-bg: #f0f8ff;
+  --table-panel-dShadow: #535353bf;
+  --table-board-score-bg: #f0f8ff;
+  --table-board-score-dShadow: #535353bf;
+  --table-board-cell-bg: #e8f1ff;
+  --table-board-cell-dark-bg: #b0c4de;
+  --table-board-cell-red-bg: #f08080;
+  --table-score-cell-bg: #e8f1ff;
+
+  --footer-bg: #00b4d8;
+  --footer-dshadow: #000000;
+  --footer-text-color: #f5f5f5;
+
+  /* Body color */
+  background-color: var(--body-bg);
 }
 
 /* ? DONE: Add a footer at the bottom of the page with your full name. */
@@ -17,13 +45,13 @@ footer {
   left: 0px;
   top: 95%;
   position: fixed;
-  background-color: #00b4d8;
-  filter: drop-shadow(0px 1px 3px rgb(0, 0, 0));
+  background-color: var(--footer-bg);
+  filter: drop-shadow(0px 1px 3px var(--footer-dshadow));
 }
 
 footer h2 {
   font-size: large;
-  color: whitesmoke;
+  color: var(--footer-text-color);
   padding-top: 5px;
   margin: auto;
 }
@@ -32,18 +60,11 @@ footer h2 {
   display: none;
 }
 
-/* ---- Dark Mode ---- */
-
-.dark-mode {
-  background-color: rgb(75, 72, 72);
-  color: rgb(157, 212, 76);
-}
-
 /* ---- Buttons ---- */
 
 .face {
   animation: faceAnime 3s ease 5s infinite alternate-reverse both;
-  background-color: aliceblue;
+  background-color: var(--button-face-bg);
   margin: 20px;
   /* position: fixed; */
   margin: auto;
@@ -96,16 +117,16 @@ footer h2 {
 
 .difficulty {
   font-size: large;
-  background-color: rgb(255, 212, 212);
+  background-color: var(--button-difficulty-bg);
   border-radius: 6px;
   border-width: 2px;
   margin-bottom: 15px;
   /* box-shadow: 2px 2px 2px rgba(201, 201, 201, 0.763); */
-  filter: drop-shadow(1px 1px 1px rgba(83, 83, 83, 0.749));
+  filter: drop-shadow(1px 1px 1px var(--button-difficulty-dShadow));
 }
 
 .difficulty:hover {
-  background-color: pink;
+  background-color: var(--button-hover-difficulty-bg);
   cursor: pointer;
   border-radius: 8px;
 }
@@ -118,7 +139,7 @@ footer h2 {
   /* position: absolute; */
   /* margin: auto; */
   /* top: 10%; */
-  background-color: transparent;
+  background-color: var(--button-darkmode-bg);
   border-width: 0px;
 }
 
@@ -132,7 +153,7 @@ footer h2 {
   /* margin-left: 5%; */
   /* margin: auto; */
   /* top: 10%; */
-  background-color: transparent;
+  background-color: var(--button-score-bg);
   border-width: 0px;
 }
 
@@ -148,11 +169,11 @@ footer h2 {
 }
 
 .time {
-  color: rgb(245, 81, 21);
+  color: var(--panel-time-text-color);
 }
 
 .pannel {
-  background-color: aliceblue;
+  background-color: var(--table-panel-bg);
   /* margin-bottom: 15px;
     margin-top: 10px; */
   height: fit-content;
@@ -162,7 +183,7 @@ footer h2 {
   margin-right: auto;
   table-layout: fixed;
   width: 400px;
-  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
+  filter: drop-shadow(1px 5px 5px var(--table-panel-dShadow));
 }
 
 .pannel td {
@@ -174,7 +195,7 @@ footer h2 {
 }
 
 .score-board tbody tr td {
-  background-color: rgb(232, 241, 255);
+  background-color: var(--table-score-cell-bg);
 }
 
 /* ---- Board ---- */
@@ -188,8 +209,8 @@ footer h2 {
   height: 400px;
   margin-left: auto;
   margin-right: auto;
-  background-color: aliceblue;
-  filter: drop-shadow(1px 5px 5px rgba(83, 83, 83, 0.749));
+  background-color: var(--table-board-score-bg);
+  filter: drop-shadow(1px 5px 5px var(--table-board-score-dShadow));
 }
 
 .cell {
@@ -211,13 +232,13 @@ footer h2 {
     margin-right: auto; */
   /* font-size: XX-large; */
   cursor: crosshair;
-  background-color: rgb(232, 241, 255);
+  background-color: var(--table-board-cell-bg);
 }
 
 .dark {
-  background-color: lightsteelblue;
+  background-color: var(--table-board-cell-dark-bg);
 }
 
 .red {
-  background-color: lightcoral;
+  background-color: var(--table-board-cell-red-bg);
 }

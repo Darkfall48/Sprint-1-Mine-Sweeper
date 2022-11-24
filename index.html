@@ -8,7 +8,7 @@
     <title>Sprint 1 by Sidney Sebban</title>
   </head>
   <body onload="initGame()" oncontextmenu="return false">
-    <h1 title="Made By Sidney Sebban">Mine Sweeper</h1>
+    <h1 class="title" title="Made By Sidney Sebban">Mine Sweeper</h1>
     <div class="head-pannel">
       <button
         class="score-button"
@@ -18,21 +18,21 @@
         🏆
       </button>
       <button
-        class="difficulty easy"
+        class="difficulty easy title"
         onclick="setDifficulty(4, 2,1, 'Easy')"
         title="Choose the difficulty"
       >
         Easy
       </button>
       <button
-        class="difficulty medium"
+        class="difficulty medium title"
         onclick="setDifficulty(8, 14,3, 'Medium')"
         title="Choose the difficulty"
       >
         Medium
       </button>
       <button
-        class="difficulty hard"
+        class="difficulty hard title"
         onclick="setDifficulty(12, 32,5,'Hard')"
         title="Choose the difficulty"
       >
@@ -51,10 +51,14 @@
       <tbody>
         <tr>
           <td>
-            <h2 title="Lives left">Lives: <span class="lives"></span></h2>
+            <h2 class="title" title="Lives left">
+              Lives: <span class="lives"></span>
+            </h2>
           </td>
           <td>
-            <h2 title="Hints left"><span class="hints"></span> :Hints</h2>
+            <h2 class="title" title="Hints left">
+              <span class="hints"></span> :Hints
+            </h2>
           </td>
         </tr>
       </tbody>
@@ -63,8 +67,12 @@
       <tbody>
         <tr>
           <td>
-            <h2 title="Flags left">🚩: <span class="marked">0</span></h2>
-            <h2 title="Cells checked">🔎: <span class="shown">0</span></h2>
+            <h2 class="title" title="Flags left">
+              🚩: <span class="marked">0</span>
+            </h2>
+            <h2 class="title" title="Cells checked">
+              🔎: <span class="shown">0</span>
+            </h2>
           </td>
           <td>
             <button class="face" onclick="setDifficulty()">😋</button>
@@ -83,8 +91,8 @@
       <table class="score-board" border="1" cellpadding="auto">
         <thead>
           <tr>
-            <td><h3>Level</h3></td>
-            <td><h3>Score</h3></td>
+            <td><h3 class="title">Level</h3></td>
+            <td><h3 class="title">Score</h3></td>
           </tr>
         </thead>
         <tbody class="render-score"></tbody>

@@ -143,7 +143,7 @@ function gameIsOver() {
   elFace.innerText = gGame.isWinning ? WINFACE : SADFACE
 }
 
-// TODO: Implement Dark-Mode for the game
+//? DONE: Implement Dark-Mode for the game
 function toggleDarkMode() {
   const elBody = document.querySelector('body')
   elBody.classList.toggle('dark-mode')

@@ -11,9 +11,11 @@
 body {
   /** Light Mode Theme*/
   --body-bg: #89dcfa;
+  --body-title-text-color: rgb(0, 0, 0);
 
   --button-face-bg: #f0f8ff;
   --button-difficulty-bg: #ffd4d4;
+  --button-difficulty-border-color: #000000;
   --button-difficulty-dShadow: #535353bf;
   --button-hover-difficulty-bg: #ffc0cb;
   --button-darkmode-bg: transparent;
@@ -36,6 +38,41 @@ body {
 
   /* Body color */
   background-color: var(--body-bg);
+}
+body.dark-mode {
+  /** Light Mode Theme*/
+  --body-bg: #494949; /*586069*/
+  --body-title-text-color: #dcdee1;
+
+  --button-face-bg: #f0f8ff;
+  --button-difficulty-bg: #436ead;
+  --button-difficulty-border-color: grey;
+  --button-difficulty-dShadow: #285513bf;
+  --button-hover-difficulty-bg: #5876ef;
+  --button-darkmode-bg: transparent;
+  --button-score-bg: transparent;
+
+  --panel-time-text-color: #f55115;
+
+  --table-panel-bg: #4d789e;
+  --table-panel-dShadow: #bcadad;
+  --table-board-score-bg: #4d789e;
+  --table-board-score-dShadow: #bcadad;
+  --table-board-cell-bg: #599bb5;
+  --table-board-cell-dark-bg: #;
+  --table-board-cell-red-bg: #a35353;
+  --table-score-cell-bg: #566c7e;
+
+  --footer-bg: #416aa4;
+  --footer-dshadow: #ffffff9c;
+  --footer-text-color: #f5f5f5e4;
+
+  /* Body color */
+  background-color: var(--body-bg);
+}
+
+.title {
+  color: var(--body-title-text-color);
 }
 
 /* ? DONE: Add a footer at the bottom of the page with your full name. */
@@ -118,6 +155,7 @@ footer h2 {
 .difficulty {
   font-size: large;
   background-color: var(--button-difficulty-bg);
+  border-color: var(--button-difficulty-border-color);
   border-radius: 6px;
   border-width: 2px;
   margin-bottom: 15px;

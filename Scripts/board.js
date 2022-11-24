@@ -211,8 +211,8 @@ function renderCell(location, value) {
   }
 }
 
+//? DONE: Called when a cell (td) is clicked
 function cellClicked(elCell, i, j) {
-  //? DONE: Called when a cell (td) is clicked
   //   console.log('elCell:', elCell)
   //   console.log('i:', i)
   //   console.log('j:', j)
@@ -276,6 +276,7 @@ function cellClicked(elCell, i, j) {
   }
 }
 
+//? DONE: Called on right click to mark a cell (suspected to be a mine)
 function cellMarked(elCell, cellI, cellJ) {
   //? DONE: Search the web (and implement) how to hide the context menu on right click
   //? DONE: User can click only if the game is ON and if the cell is not shown
@@ -290,7 +291,6 @@ function cellMarked(elCell, cellI, cellJ) {
   if (gBoard[cellI][cellJ].isShown) return
   //   console.log("It's right!")
   //   console.log(elCell)
-  //? DONE: Called on right click to mark a cell (suspected to be a mine)
   // When the cell is unmarked:
   if (!gBoard[cellI][cellJ].isMarked) {
     //? DONE: Prevent user from checking more cells than allowed

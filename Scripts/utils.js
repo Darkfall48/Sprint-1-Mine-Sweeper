@@ -3,7 +3,7 @@
 var gStartTime
 var gTimeInterval
 
-//? Stop the intervals
+//? DONE: Stop the intervals
 function stopIntervals() {
   //? DONE: Stop Time
   clearInterval(gTimeInterval)
@@ -55,7 +55,7 @@ function getRandomColor() {
   return randomColor
 }
 
-//? Check if the user can use Web Storage
+//? DONE: Check if the user can use Web Storage
 function checkWebStorage() {
   if (typeof Storage === 'undefined') {
     console.log('Sorry, your browser does not support Web Storage')

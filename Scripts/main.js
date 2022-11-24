@@ -121,10 +121,12 @@ function updateShownCount(value) {
   checkGameOver()
 }
 
+//* TODO: add Hints to the game
 function onHints() {
   console.log('hello')
 }
 
+//? Check if the game is over and if it's victory
 function checkGameOver() {
   //? DONE: Game ends when all mines are marked
   //? DONE: and all the other cells are shown
@@ -141,6 +143,8 @@ function checkGameOver() {
     gameIsOver()
   }
 }
+
+//? End the game
 function gameIsOver() {
   gGame.isOn = false
   gGame.isStarted = false

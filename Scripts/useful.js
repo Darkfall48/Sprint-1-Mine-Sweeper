@@ -1,5 +1,8 @@
 'use strict'
 
+//* My personal database of utils functions
+//* Not linked to the project
+
 //? Create and return a sized matrix
 function createMat(ROWS, COLS) {
   const mat = []

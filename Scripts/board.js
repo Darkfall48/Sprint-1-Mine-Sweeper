@@ -249,6 +249,7 @@ function cellClicked(elCell, i, j) {
     elCell.classList.add('red')
     if (gLevel.Lives === 0 || isNaN(gLevel.Lives)) {
       //? DONE: Game Over!
+      playAudio('game-over')
       gameIsOver()
       return
     }

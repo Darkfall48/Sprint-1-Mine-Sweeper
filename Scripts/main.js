@@ -101,6 +101,7 @@ function checkGameOver() {
     +gGame.showCount === +emptyCount
   ) {
     console.log('You Win!!!')
+    playAudio('victory')
     gGame.isWinning = true
     //? DONE: Because of this function, the face change back to SAD
     gameIsOver()

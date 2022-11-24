@@ -133,7 +133,7 @@ footer h2 {
   margin-right: auto; */
   /* font-size: XX-large; */
   cursor: crosshair;
-  background-color: aliceblue;
+  background-color: rgb(232, 241, 255);
 }
 
 /* .isMarked {
@@ -163,4 +163,24 @@ footer h2 {
 
 .red {
   background-color: lightcoral;
+}
+
+.dark-mode-button {
+  font-size: xx-large;
+  position: absolute;
+  margin: auto;
+  right: 10%;
+  top: 10%;
+  background-color: transparent;
+  border-width: 0px;
+}
+
+.dark-mode-button:hover {
+  opacity: 50%;
+  cursor: pointer;
+}
+
+.dark-mode {
+  background-color: black;
+  color: greenyellow;
 }

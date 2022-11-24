@@ -115,3 +115,8 @@ function gameIsOver() {
   const elFace = document.querySelector('.face')
   elFace.innerText = gGame.isWinning ? WINFACE : SADFACE
 }
+
+function toggleDarkMode() {
+  const elBody = document.querySelector('body')
+  elBody.classList.toggle('dark-mode')
+}

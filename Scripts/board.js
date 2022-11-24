@@ -207,7 +207,7 @@ function renderCell(location, value) {
   }
   elCell.innerHTML = value
   if (!gBoard[location.i][location.j].isMine) {
-    elCell.classList.add('dark')
+    elCell.classList.add('dark-cell')
   }
 }
 
@@ -231,6 +231,7 @@ function cellClicked(elCell, i, j) {
   }
 
   //? DONE: BONUS: Place the mines and count the neighbors only on first click.
+  //! KNOWN ISSUE: It's not working, before it was.
   if (!gIsMinesOnBoard) {
     setRandomMines()
     gIsMinesOnBoard = true
@@ -241,7 +242,7 @@ function cellClicked(elCell, i, j) {
   //   console.log(gBoard[i][j])
 
   //* Update the DOM
-  elCell.classList.add('dark')
+  elCell.classList.add('dark-cell')
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
     //? DONE: Play the audio file
@@ -249,7 +250,7 @@ function cellClicked(elCell, i, j) {
     //? DONE: When a MINE is clicked, there is an indication to the user that he clicked a mine. The LIVES counter decreases. The user can continue playing .
     gLevel.Lives--
     updateLives(gLevel.Lives)
-    elCell.classList.add('red')
+    elCell.classList.add('red-cell')
     if (gLevel.Lives === 0 || isNaN(gLevel.Lives)) {
       //? DONE: Game Over!
       playAudio('game-over')

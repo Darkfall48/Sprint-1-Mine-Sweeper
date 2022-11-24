@@ -272,10 +272,10 @@ footer h2 {
 }
 
 /** When the cell in the board is clicked **/
-.dark {
+.dark-cell {
   background-color: var(--table-board-cell-dark-bg);
 }
 
-.red {
+.red-cell {
   background-color: var(--table-board-cell-red-bg);
 }

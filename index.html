@@ -10,13 +10,17 @@
   <body onload="initGame()" oncontextmenu="return false">
     <h1>Mine Sweeper</h1>
     <div>
-      <button class="difficulty easy" onclick="setDifficulty(4, 2,1)">
+      <button class="score-button" onclick="showScore()">🏆</button>
+      <button class="difficulty easy" onclick="setDifficulty(4, 2,1, 'Easy')">
         Easy
       </button>
-      <button class="difficulty medium" onclick="setDifficulty(8, 14,3)">
+      <button
+        class="difficulty medium"
+        onclick="setDifficulty(8, 14,3, 'Medium')"
+      >
         Medium
       </button>
-      <button class="difficulty hard" onclick="setDifficulty(12, 32,5)">
+      <button class="difficulty hard" onclick="setDifficulty(12, 32,5,'Hard')">
         Hard
       </button>
 
@@ -42,7 +46,7 @@
             <h2>🔎: <span class="shown">0</span></h2>
           </td>
           <td>
-            <button class="face" onclick="initGame()">😋</button>
+            <button class="face" onclick="setDifficulty()">😋</button>
           </td>
           <td>
             <h2>
@@ -53,8 +57,18 @@
         </tr>
       </tbody>
     </table>
-
     <div class="board-table"></div>
+    <div class="score-table">
+      <table class="score-board" border="1" cellpadding="auto">
+        <thead>
+          <tr>
+            <td><h3>Level</h3></td>
+            <td><h3>Score</h3></td>
+          </tr>
+        </thead>
+        <tbody class="render-score"></tbody>
+      </table>
+    </div>
     <!--? DONE: Add a footer at the bottom of the page with your full name. -->
     <footer>
       <h2>Made by Sidney Sebban</h2>

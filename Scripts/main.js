@@ -9,11 +9,18 @@ const WINFACE = '😎'
 //* Lives
 const LIVE = '💖'
 const DEAD = '☠️'
-const HINT = '💡'
+const HINT = '<span onclick="onHints()" style="cursor: pointer">💡</span>'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
-var gLevel = { Size: 4, Mines: 2, Lives: 1 } // Default value
+var gLevel = {
+  Level: 'Easy',
+  Size: 4,
+  Mines: 2,
+  Lives: 1,
+} // Default value
+var gBestScore = []
+var gisScoreShown = false
 
 //* This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play
@@ -25,6 +32,7 @@ var gGame
 
 //? DONE: This is called when page loads
 function initGame() {
+  hideScrollbar()
   // Because of CSS problem, I decided to use the Zoom out (CTRL+-) from the page of the user
   document.body.style.zoom = '90%'
   const elFace = document.querySelector('.face')
@@ -40,6 +48,7 @@ function initGame() {
   updateShownCount(0)
   updateLives(gLevel.Lives)
   updateHints(gGame.hints)
+  storeBestScore()
 }
 
 //? DONE: Add support for “LIVES”
@@ -58,14 +67,20 @@ function updateLives(livesNmb = 1) {
 //? DONE: Add support for “HINTS”
 function updateHints(hintsNmb = 3) {
   const elHints = document.querySelector('.hints')
-  elHints.innerText = ''
+  elHints.innerHTML = ''
   for (var i = 0; i < hintsNmb; i++) {
-    elHints.innerText += HINT
+    elHints.innerHTML += HINT
   }
 }
 
-function setDifficulty(size = 4, minesNb = 2, lives) {
-  gLevel = { Size: size, Mines: minesNb, Lives: lives }
+function setDifficulty(size = 4, minesNb = 2, lives = 1, diffStr) {
+  if (!diffStr) diffStr = 'Easy'
+  gLevel = {
+    Level: diffStr,
+    Size: size,
+    Mines: minesNb,
+    Lives: lives,
+  }
   initGame()
 }
 
@@ -93,6 +108,10 @@ function updateShownCount(value) {
   checkGameOver()
 }
 
+function onHints() {
+  console.log('hello')
+}
+
 function checkGameOver() {
   //? DONE: Game ends when all mines are marked
   //? DONE: and all the other cells are shown
@@ -114,11 +133,105 @@ function gameIsOver() {
   gGame.isStarted = false
   revealMines(gBoard)
   stopIntervals()
+  storeBestScore()
   const elFace = document.querySelector('.face')
   elFace.innerText = gGame.isWinning ? WINFACE : SADFACE
 }
 
+// TODO: Implement Dark-Mode for the game
 function toggleDarkMode() {
   const elBody = document.querySelector('body')
   elBody.classList.toggle('dark-mode')
+}
+
+//TODO: Keep the best score in local storage (per level)
+function storeBestScore() {
+  //* First lets check if the user can use that feature
+  if (typeof Storage === 'undefined') {
+    console.log('Sorry, your browser does not support Web Storage')
+    return
+  } else {
+    console.log('Your browser support Web Storage!')
+  }
+
+  //* Check if the user Win
+  if (!gGame.isOn && gGame.isWinning) {
+    // console.log(gGame.secsPassed)
+    //   console.log(gLevel.Level)
+    var timeScore = +gGame.secsPassed
+    var levelScore = gLevel.Level
+
+    localStorage.setItem('Score', timeScore)
+    localStorage.setItem('Level', levelScore)
+
+    const localScore = +localStorage.getItem('Score')
+    const localLevel = localStorage.getItem('Level')
+    console.log('Score:', localScore, '\nLevel:', localLevel)
+
+    const user = { Level: localLevel, Score: localScore }
+    console.log(user)
+    gBestScore.push(user)
+  }
+}
+
+// Show the score panel with scores rendered
+function showScore() {
+  const elTable = document.querySelector('.board-table')
+  const elPannel = document.querySelectorAll('.pannel')
+  const elDiffBtn = document.querySelectorAll('.difficulty')
+  if (!gisScoreShown) {
+    // Show Score Panel with rendered scores
+    renderScore()
+    for (var i = 0; i < elPannel.length; i++) {
+      const currentPannel = elPannel[i]
+      currentPannel.classList.add('hide')
+    }
+    elTable.classList.add('hide')
+    // Disable the difficulty buttons
+    for (var i = 0; i < elDiffBtn.length; i++) {
+      const currentBtn = elDiffBtn[i]
+      currentBtn.disabled = true
+      currentBtn.style.cursor = 'not-allowed'
+    }
+    gisScoreShown = true
+  } else {
+    // Hide Score Panel
+    for (var i = 0; i < elPannel.length; i++) {
+      const currentPannel = elPannel[i]
+      currentPannel.classList.remove('hide')
+    }
+    elTable.classList.remove('hide')
+    // Enable the difficulty buttons
+    for (var i = 0; i < elDiffBtn.length; i++) {
+      const currentBtn = elDiffBtn[i]
+      currentBtn.disabled = false
+      currentBtn.style.cursor = 'pointer'
+    }
+    gisScoreShown = false
+  }
+}
+
+// Render the scores in the index HTML
+function renderScore() {
+  if (!gBestScore) return
+  var strHTML = ''
+
+  for (let i = 0; i < gBestScore.length; i++) {
+    const currentLevel = gBestScore[i].Level
+    const currentScore = gBestScore[i].Score
+    strHTML += `<tr>
+      <td>${currentLevel}</td>
+      <td>${currentScore}</td>
+    </tr>`
+  }
+
+  const elRenderScore = document.querySelector('.render-score')
+  elRenderScore.innerHTML = strHTML
+}
+
+//? Hide the scroll bar (because I don't like it)
+function hideScrollbar() {
+  var style = document.createElement('style')
+  style.innerHTML = `body::-webkit-scrollbar {display: none;}`
+  document.head.appendChild(style)
 }

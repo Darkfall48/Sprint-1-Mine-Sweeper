@@ -25,6 +25,8 @@ var gGame
 
 //? DONE: This is called when page loads
 function initGame() {
+  // Because of CSS problem, I decided to use the Zoom out (CTRL+-) from the page of the user
+  document.body.style.zoom = '90%'
   const elFace = document.querySelector('.face')
   elFace.innerText = HAPPYFACE
   // Stopping all the intervals

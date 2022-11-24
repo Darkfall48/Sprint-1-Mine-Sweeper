@@ -10,32 +10,45 @@
   <body onload="initGame()" oncontextmenu="return false">
     <h1>Mine Sweeper</h1>
     <div>
-      <button class="difficulty easy" onclick="setDifficulty(4, 2)">
+      <button class="difficulty easy" onclick="setDifficulty(4, 2,1)">
         Easy
       </button>
-      <button class="difficulty medium" onclick="setDifficulty(8, 14)">
+      <button class="difficulty medium" onclick="setDifficulty(8, 14,3)">
         Medium
       </button>
-      <button class="difficulty hard" onclick="setDifficulty(12, 32)">
+      <button class="difficulty hard" onclick="setDifficulty(12, 32,5)">
         Hard
       </button>
     </div>
-
     <table class="pannel" border="1">
       <tbody>
-        <td>
-          <h2>🚩: <span class="marked">0</span></h2>
-          <h2>🔎: <span class="shown">0</span></h2>
-        </td>
-        <td>
-          <button class="face" onclick="initGame()">😋</button>
-        </td>
-        <td>
-          <h2>
-            ⏰<br />
-            <br /><span class="time">00</span>
-          </h2>
-        </td>
+        <tr>
+          <td>
+            <h2>Lives: <span class="lives"></span></h2>
+          </td>
+          <td>
+            <h2><span class="hints"></span> :Hints</h2>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="pannel" border="1">
+      <tbody>
+        <tr>
+          <td>
+            <h2>🚩: <span class="marked">0</span></h2>
+            <h2>🔎: <span class="shown">0</span></h2>
+          </td>
+          <td>
+            <button class="face" onclick="initGame()">😋</button>
+          </td>
+          <td>
+            <h2>
+              ⏰<br />
+              <br /><span class="time">00</span>
+            </h2>
+          </td>
+        </tr>
       </tbody>
     </table>
 

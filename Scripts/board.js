@@ -22,6 +22,7 @@ function buildBoard() {
     markedCount: 0,
     goodFlaggedCount: 0,
     secsPassed: 0,
+    hints: 3,
   }
   gIsMinesOnBoard = false
   gBoard = createBoard(gLevel.Size) //? DONE: Change '4' to difficulties
@@ -123,12 +124,12 @@ function countNeighbors(board, cellI, cellJ) {
 }
 
 function expandShown(board, elCell, cellI, cellJ) {
-  // TODO: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
+  //? DONE: When user clicks a cell with no mines around, we need to open not only that cell, but also its neighbors.
   if (board[cellI][cellJ].minesAroundCount > 0) return
   //   console.log('board', board)
   //   console.log('elCell', elCell)
   //   console.log('i', cellI, 'j', cellJ)
-  // ? NOTE: start with a basic implementation that only opens the non-mine 1st degree neighbors
+  //? NOTE: start with a basic implementation that only opens the non-mine 1st degree neighbors
   for (var i = cellI - 1; i <= cellI + 1; i++) {
     // If on border, continue
     if (i < 0 || i >= board.length) continue
@@ -240,11 +241,17 @@ function cellClicked(elCell, i, j) {
   elCell.classList.add('dark')
   if (gBoard[i][j].isMine) {
     renderCell({ i, j }, MINE)
-    //? DONE: Game Over!
     //? DONE: Play the audio file
     playAudio('explode')
-    gameIsOver()
+    //? DONE: When a MINE is clicked, there is an indication to the user that he clicked a mine. The LIVES counter decreases. The user can continue playing .
+    gLevel.Lives--
+    updateLives(gLevel.Lives)
     elCell.classList.add('red')
+    if (gLevel.Lives === 0 || isNaN(gLevel.Lives)) {
+      //? DONE: Game Over!
+      gameIsOver()
+      return
+    }
   } else {
     //* DONE: Count neighbors
     setMinesNegsCount(gBoard)

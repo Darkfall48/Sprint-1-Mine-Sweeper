@@ -6,6 +6,10 @@
 const HAPPYFACE = '😋'
 const SADFACE = '🥹'
 const WINFACE = '😎'
+//* Lives
+const LIVE = '💖'
+const DEAD = '☠️'
+const HINT = '💡'
 
 //* This is an object by which the board size is set (in this case: 4x4 board and how many mines to put)
 /* gLevel = { SIZE: 4, MINES: 2 }; */
@@ -32,10 +36,34 @@ function initGame() {
   renderBoard(gBoard, '.board-table')
   updateMarkedCount(gLevel.Mines)
   updateShownCount(0)
+  updateLives(gLevel.Lives)
+  updateHints(gGame.hints)
 }
 
-function setDifficulty(size = 4, minesNb = 2) {
-  gLevel = { Size: size, Mines: minesNb }
+//? DONE: Add support for “LIVES”
+function updateLives(livesNmb = 1) {
+  const elLives = document.querySelector('.lives')
+  elLives.innerText = ''
+  if (livesNmb === 0 || isNaN(gLevel.Lives)) {
+    elLives.innerText = DEAD
+    return
+  }
+  for (var i = 0; i < livesNmb; i++) {
+    elLives.innerText += LIVE
+  }
+}
+
+//? DONE: Add support for “HINTS”
+function updateHints(hintsNmb = 3) {
+  const elHints = document.querySelector('.hints')
+  elHints.innerText = ''
+  for (var i = 0; i < hintsNmb; i++) {
+    elHints.innerText += HINT
+  }
+}
+
+function setDifficulty(size = 4, minesNb = 2, lives) {
+  gLevel = { Size: size, Mines: minesNb, Lives: lives }
   initGame()
 }
 
